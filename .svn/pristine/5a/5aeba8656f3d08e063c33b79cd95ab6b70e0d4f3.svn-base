@@ -1,0 +1,118 @@
+<template>
+  <div class="flights">
+    <div v-show="showFlightList">
+      <SearchForm v-if="showSearchModel" @CloseSearchModel="CloseSearchModel" />
+      <FlightsHeader v-else @SearchModel="SearchModel" />
+      <FlightsSort :sortTitle="sortTitle" @sortFlightList="sortFlightList" @FilterModel="FilterModel" />
+      <FlightsList :advImagelist="advImagelist" @selectReturnFlight="selectReturnFlight" />
+    </div>
+    <FlightsFilter v-if="showFilterModel" @CloseFilterModel="CloseFilterModel" />
+    <div></div>
+  </div>
+</template>
+<script>
+import FlightsHeader from './FlightsHeader.vue';
+import FlightsSort from './FlightsSort.vue';
+import FlightsList from './FlightsList.vue';
+import FlightsFilter from './FlightsFilter.vue';
+import SearchForm from './SearchForm.vue';
+import { getSearchFlightsURLStirng } from '@/constants/ApiConstants';
+import { Toast, Indicator } from 'mint-ui';
+// import { mapState, mapMutations } from 'vuex';
+import { CHANGE_TYPE, SAVE_FLIGHTINFO } from '@/store/type';
+
+export default {
+  name: 'flights',
+  components: {
+    FlightsHeader,
+    FlightsSort,
+    FlightsList,
+    SearchForm,
+    FlightsFilter
+  },
+  data () {
+    return {
+      sortTitle: 'Select flight',
+      advImagelist: [],
+      showDiffFlight: 1,
+      showFlightList: true,
+      showSearchModel: false,
+      showFilterModel: false
+    };
+  },
+  created () {
+    this.getSearchFlightsList();
+  },
+  methods: {
+    CloseSearchModel () {
+      this.showSearchModel = false;
+    },
+    SearchModel () {
+      this.showSearchModel = true;
+    },
+    CloseFilterModel (data) {
+      this.showFlightList = true;
+      this.showFilterModel = false;
+      if (data) {
+        console.log(data);
+      }
+    },
+    selectReturnFlight () {
+      this.sortTitle = 'Select Returnning flight';
+    },
+    FilterModel () {
+      this.showFilterModel = true;
+      this.showFlightList = false;
+    },
+    sortFlightList (type) {
+      switch (type) {
+        case 0: this.showDiffFlight = 1;
+          this.sortTitle = 'Select flight';
+          this.$store.commit(CHANGE_TYPE, 0);
+          break;
+        case 1: this.showDiffFlight = 2;
+          this.sortTitle = 'Select Going flight';
+          this.$store.commit(CHANGE_TYPE, 1);
+          break;
+        case 2: this.showDiffFlight = 3;
+          this.sortTitle = 'Select flight';
+          this.$store.commit(CHANGE_TYPE, 1);
+          break;
+        default:
+          break;
+      }
+    },
+    getSearchFlightsList () {
+      Indicator.open({
+        spinnerType: 'fading-circle',
+        text: 'Searching for lowest price flight.'
+      });
+      this.advImagelist = [
+        require('../images/1.png'),
+        require('../images/2.png'),
+        require('../images/3.png'),
+        require('../images/1.png')
+      ];
+      let tripType = this.$store.state.FlightInfo.tripType;
+      let url = `${getSearchFlightsURLStirng}?from=${'BOM'}&to=${'DEL'}&adults=${1}&childs=${0}&baby=${0}&cabinClass=${'Economy'}&tripType=${tripType}&departDate=${'2019-03-15'}&returnDate=${'2019-03-16'}&airline=&carrier=`;
+      // let url = `${getSearchFlightsURLStirng}?from=${'BOM'}&to=${'SIN'}&adults=${1}&childs=${0}&baby=${0}&cabinClass=${'Economy'}&tripType=${tripType}&departDate=${'2019-03-16'}&returnDate=${'2019-03-18'}&airline=&carrier=`;
+      this.$http(url).then(res => {
+        Indicator.close();
+        if (res.success) {
+          this.$store.commit(SAVE_FLIGHTINFO, res);
+        } else {
+          Toast(res.msg);
+        }
+      }).catch(err => {
+        Indicator.close();
+        Toast(err);
+      });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flights{
+  position: relative;
+}
+</style>

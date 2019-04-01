@@ -1,0 +1,25 @@
+import * as type from '../type';
+
+export const FlightInfo = {
+  state: {
+    tripType: 0,
+    flightDetail: null,
+    flightData: {},
+    sort: 0 // bestPirce  shortest departue
+  },
+  actions: {
+    //
+  },
+  mutations: {
+    [type.CHANGE_TYPE] (state, type) {
+      state.tripType = type;
+    },
+    [type.SAVE_FLIGHTINFO] (state, data) {
+      state.flightData = data;
+    },
+    [type.CHANGE_FLIGHT_SORT] (state, sortString) {
+      state.sort = sortString
+    }
+
+  }
+};

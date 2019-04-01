@@ -1,0 +1,10 @@
+
+// heg_pai
+export const searchAirPortCity = '/heg_api/airportCity/searchAirPortCity.do';
+export const getLowPriceCalendar = '/heg_api/flight/getLowPriceCalendar.do';
+export const advList = '/heg_api/advertising/advList.do';
+export const queryUserOrderNew = '/heg_api/queryUserOrderNew.do';
+export const queryUserOrderDetail = '/heg_api/queryOrderDetailByTripIdNew.do';
+// flight_api
+export const getSearchFlightsURLStirng = '/flight_api/flight/SearchFlightsNew.do';
+export const getOffers = '/heg_api/advertising/advList.do?type=13&device=0';

@@ -1,0 +1,41 @@
+<template>
+  <div>
+    <SearchCity v-if="showCityLayer"/>
+    <Calendar v-if="showCalendarLayer" />
+    <SearchPassenger v-if="showPassengerLayer" />
+    <SearchForm />
+
+  </div>
+</template>
+<script>
+import SearchForm from './SearchForm';
+import { mapState } from 'vuex';
+// SearchCity: () => import('@/components/SearchCity')
+export default {
+  name: 'Home',
+  components: {
+    SearchForm,
+    SearchCity: () => import('@/components/SearchCity'),
+    Calendar: () => import('@/components/Calendar'),
+    SearchPassenger: () => import('@/components/SearchPassenger')
+  },
+  data () {
+    return {
+      showCity: false
+    };
+  },
+  computed: {
+    ...mapState({
+      showCityLayer: (state) => state.SearchForm.showCityLayer,
+      showCalendarLayer: (state) => state.SearchForm.showCalendarLayer,
+      showPassengerLayer: (state) => state.SearchForm.showPassengerLayer
+    })
+  },
+  methods: {
+
+  },
+  created () {
+
+  }
+};
+</script>

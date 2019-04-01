@@ -1,0 +1,46 @@
+export const MyTripList = {
+  state: {
+    status: null,
+    tripDetail: {
+      show: false,
+      info: null
+    },
+    triplistArray: null
+  },
+  actions: {
+    selectDiffStatus ({ commit, state }, status) {
+      state.status = status;
+      commit('saveMyTripList', status);
+    }
+  },
+  mutations: {
+    saveMyTripList (state, data) {
+      let arr = [
+        { id: 0, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') }
+      ];
+      state.triplistArray = arr;
+      state.status = data;
+      switch (data) {
+        case 'Upcoming':
+          break;
+        case 'Unpaid':
+          let arr1 = [
+            { id: 0, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+            { id: 1, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+          ];
+          state.triplistArray = arr1;
+          break;
+        case 'Completed':
+          break;
+        case 'Cancelled':
+          break;
+        default:
+          break;
+      }
+    },
+    saveTripDetail (state, data) {
+      console.log(state)
+      state.tripDetail = data;
+    }
+  }
+};

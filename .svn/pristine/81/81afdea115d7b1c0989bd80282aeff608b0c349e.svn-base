@@ -1,0 +1,124 @@
+<template>
+  <div >
+    <div class="confirm-info">
+      <p class="confirm-info-title">Confirm Your Trip</p>
+      <div class="confirm-info-detail-box">
+        <div class="confirm-info-detail">
+          <p class="confirm-info-detail-title">Dubai(DXB) - Mumbai(BOM)</p>
+          <ul>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Operated by:</div>
+              <div class="s-confirm-general s-confirm-general-val"> Cathay Pacific</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Departure : </div>
+              <div class="s-confirm-general s-confirm-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Arrival:</div>
+              <div class="s-confirm-general s-confirm-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Flight Duration:</div>
+              <div class="s-confirm-general s-confirm-general-val">2h15m, none-stop</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Baggage policy: </div>
+              <div class="s-confirm-general s-confirm-general-val">1 checkin baggage(&lt;25kg), 1 Cabin Baggage(&lt;7kg)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="confirm-info-detail-box box_2">
+        <div class="confirm-info-detail">
+          <p class="confirm-info-detail-title">Dubai(DXB) - Mumbai(BOM)</p>
+          <ul>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Operated by:</div>
+              <div class="s-confirm-general s-confirm-general-val"> Cathay Pacific</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Departure : </div>
+              <div class="s-confirm-general s-confirm-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Arrival:</div>
+              <div class="s-confirm-general s-confirm-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Flight Duration:</div>
+              <div class="s-confirm-general s-confirm-general-val">2h15m, none-stop</div>
+            </li>
+            <li class="confirm-info-detail-item">
+              <div class="s-confirm-general s-confirm-general-key">Baggage policy: </div>
+              <div class="s-confirm-general s-confirm-general-val">1 checkin baggage(&lt;25kg), 1 Cabin Baggage(&lt;7kg)</div>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="confirm-info-refund">
+        <p class="confirm-info-refundable">none-refundable</p>
+        <a href="/flights" class="green">reselect</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss" scoped>
+  .green{
+    color: $green;
+    font-size: 0.24rem;
+  }
+  .s-confirm-general{
+    line-height:0.36rem;
+    font-size:0.24rem;
+  }
+  .s-confirm-general-key{
+    width: 30%;
+    color:rgba(153,153,153,1);
+  }
+  .s-confirm-general-val{
+    width: 70%;
+    color:rgba(17,17,17,1);
+  }
+  .confirm-info{
+    padding: 0 0.3rem;
+  }
+  .confirm-info-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 700;
+  }
+  .confirm-info-detail-title{
+    font-size:0.32rem;
+    color:rgba(0,0,0,1);
+    line-height:0.39rem;
+    margin-bottom: 0.21rem;
+  }
+  .confirm-info-detail-item{
+    display: flex;
+    margin-bottom: 0.1rem;
+  }
+  .confirm-info-refundable{
+    font-size: 0.24rem;
+    color:rgba(227,164,40,1);
+    line-height:0.3rem;
+    margin-bottom: 0.1rem;
+  }
+  .confirm-info-detail-box{
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #DCDCDC;
+    &.box_2{
+      border: none;
+      margin-top: 0.3rem;
+    }
+  }
+</style>

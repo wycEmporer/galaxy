@@ -1,0 +1,31 @@
+<template>
+  <div class="search_form">
+    <button class="cancel_btn" @click="hideSearchForm">Cancel</button>
+  </div>
+</template>
+<script>
+export default {
+  methods: {
+    hideSearchForm () {
+      this.$emit('CloseSearchModel');
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.search_form{
+  text-align: center;
+  background:rgba(1,121,89,0.1);
+  box-shadow:0rem 0.02rem 0.1rem 0rem rgba(230,230,230,1);
+}
+.cancel_btn{
+  display: inline-block;
+  width:0.94rem;
+  height:0.27rem;
+  margin: 0.3rem auto 0.4rem;
+  font-size:0.24rem;
+  line-height:0.3rem;
+  color:$lighterBlack;
+  background: transparent;
+}
+</style>

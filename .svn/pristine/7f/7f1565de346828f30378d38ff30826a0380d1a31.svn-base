@@ -1,0 +1,27 @@
+<template>
+  <div class="user_trip">
+    <TripHeader></TripHeader>
+    <TripList></TripList>
+  </div>
+</template>
+<script>
+import TripHeader from './TripHeader.vue';
+import TripList from './TripList.vue';
+export default {
+  components: {
+    TripHeader,
+    TripList
+  },
+  created () {
+    this.searchUserOrderList();
+  },
+  methods: {
+    searchUserOrderList () {
+      this.$store.commit('saveMyTripList', 1);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+
+</style>

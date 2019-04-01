@@ -1,0 +1,25 @@
+<template>
+  <div class="list">
+    <FlightInfo :flightlist="flightlist" />
+  </div>
+</template>
+<script>
+import FlightInfo from '@/components/flightInfo.vue';
+export default {
+  props: ['flightlist'],
+  components: {
+    FlightInfo
+  },
+  data () {
+    return {
+
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.list{
+  padding:0.3rem;
+  background: #f1f1f1;
+}
+</style>

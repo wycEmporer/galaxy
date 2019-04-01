@@ -1,0 +1,48 @@
+<template>
+  <div>
+    <div class="payment-method">
+      <p class="payment-method-title">Select Payment Method</p>
+      <cardPayment @eventCardPay="paymentMethod" :showType = "payType == 'card' ? true : false"></cardPayment>
+      <bankPayment @eventBankPay="paymentMethod" :showType = "payType == 'bank' ? true : false"></bankPayment>
+      <walletPayment @eventWalletPay="paymentMethod" :showType = "payType == 'wallet' ? true : false"></walletPayment>
+      <upiPayment @eventUpiPay="paymentMethod" :showType = "payType == 'upi' ? true : false"></upiPayment>
+    </div>
+  </div>
+</template>
+
+<script>
+import cardPayment from './cardPayment';
+import bankPayment from './bankPayment';
+import walletPayment from './walletPayment';
+import upiPayment from './upiPayment';
+export default {
+  data(){
+    return {
+      payType : '' 
+    }
+  },
+  methods:{
+    paymentMethod(flag){
+      this.payType = flag;
+    }
+  },
+  components:{
+    cardPayment,
+    bankPayment,
+    walletPayment,
+    upiPayment 
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+  .payment-method{
+    padding: 0.3rem;
+  }
+  .payment-method-title{
+    font-size:0.28rem;
+    font-weight:bold;
+    color:rgba(102,102,102,1);
+    line-height:0.35rem;
+  }
+</style>

@@ -1,0 +1,8 @@
+<template>
+  <div class="gray">111</div>
+</template>
+<style lang="scss">
+  .gray{
+    color: $gray;
+  }
+</style>

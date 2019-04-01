@@ -1,0 +1,49 @@
+import * as type from '../type';
+
+export const FlightInfo = {
+  state: {
+    tripType: 0,
+    flightToken: null,
+    flightDetail: null,
+    onewayArray: {
+      flightArray: null,
+      isIntl: false
+    },
+    roundwayArray: {
+      departFlightArray: null,
+      returnFlightArray: null
+    },
+    IntlFlightArray: null
+  },
+  actions: {
+    //
+  },
+  mutations: {
+    [type.CHANGE_TYPE] (state, type) {
+      state.tripType = type;
+    },
+    [type.SAVE_FLIGHTINFO] (state, data) {
+      state.flightToken = data.flightToken;
+      if (state.tripType === 0) {
+        if (data.isIntl) {
+          let arr = [];
+          data.IntlFlightArray.forEach((e, i) => {
+            arr.push(e.departFlight);
+          });
+          state.onewayArray.flightArray = arr;
+          state.onewayArray.isIntl = true;
+        } else {
+          state.onewayArray.flightArray = data.departFlightArray;
+          state.onewayArray.isIntl = false;
+        }
+      } else if (state.tripType === 1) {
+        if (data.isIntl) {
+          state.IntlFlightArray = data.IntlFlightArray;
+        } else {
+          state.roundwayArray.departFlightArray = data.departFlightArray;
+          state.roundwayArray.returnFlightArray = data.returnFlightArray;
+        }
+      }
+    }
+  }
+};

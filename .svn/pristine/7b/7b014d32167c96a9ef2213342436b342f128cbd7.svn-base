@@ -1,0 +1,263 @@
+<template>
+  <div class="filter">
+    <div class="filter_header">
+      <div class="filter_header-name">Filter</div>
+      <div class="filter_header-btns">
+        <button class="btn-cancel" @click="closeFilterModel">CANCEL</button>
+        <button class="btn-done" @click="filterFlightlist">DONE</button>
+      </div>
+    </div>
+    <div class="filter_detail">
+      <div class="filter-price">
+        <div class="filter-title">
+          <div class="filter-title-name">Price</div>
+          <div class="filter-title-clear" @click="clearPrice">clear</div>
+        </div>
+        <div class="price-data">
+          <span class="rs">Rs</span> 5423 - <span class="rs">Rs</span> 12105
+        </div>
+        <div class="price-func">
+          <mt-range v-model="priceValue"
+            :min="100"
+            :max="900"
+            :step="1"
+            :bar-height="3">
+            <!-- <div slot="start">0</div>
+            <div slot="end">100</div> -->
+          </mt-range>
+        </div>
+      </div>
+      <div class="filter-stops">
+        <div class="filter-title">
+          <div class="filter-title-name">Stops</div>
+          <div class="filter-title-clear" @click="clearStops">clear</div>
+        </div>
+        <div class="filter-checklist-data">
+          <mt-checklist
+            v-model="stopValue"
+            :options="filterStops">
+          </mt-checklist>
+        </div>
+      </div>
+      <div class="filter-depart">
+        <div class="filter-title">
+          <div class="filter-title-name">Depature time - Dubai</div>
+          <div class="filter-title-clear" @click="clearDepartTime">clear</div>
+        </div>
+        <div class="filter-checklist-data">
+          <mt-checklist
+            v-model="departTime"
+            :options="filterTime">
+          </mt-checklist>
+        </div>
+      </div>
+      <div class="filter-arrive">
+        <div class="filter-title">
+          <div class="filter-title-name">Arrival Time - Mumbai</div>
+          <div class="filter-title-clear" @click="clearArriveTime">clear</div>
+        </div>
+        <div class="filter-checklist-data">
+          <mt-checklist
+            v-model="arriveTime"
+            :options="filterTime">
+          </mt-checklist>
+        </div>
+      </div>
+      <div class="filter-airline">
+        <div class="filter-title">
+          <div class="filter-title-name">Airline</div>
+          <div class="filter-title-clear" @click="clearAirline">clear</div>
+        </div>
+        <div class="filter-checklist-data">
+          <mt-checklist
+            v-model="arilineValue"
+            :options="filterAirline">
+          </mt-checklist>
+        </div>
+      </div>
+      <div class="filter-all"><span>*</span> show all</div>
+    </div>
+  </div>
+</template>
+<script>
+import { Range, Checklist } from 'mint-ui';
+export default {
+  components: {
+    'mt-range': Range,
+    'mt-checklist': Checklist
+  },
+  data () {
+    return {
+      priceValue: 50,
+      stopValue: [],
+      departTime: [],
+      arriveTime: [],
+      arilineValue: [],
+      filterStops: [ 'none-stop', '1 stop', '2 stops', 'more than 3 stops' ],
+      filterTime: [ 'before 6AM', '6AM - 12PM', '12PM - 6PM', 'after 6PM' ],
+      filterAirline: [ 'Emirate Airline', 'Cathay Pacific', 'China Airline', 'Indian Airway' ]
+    };
+  },
+  methods: {
+    closeFilterModel () {
+      this.$emit('CloseFilterModel');
+    },
+    filterFlightlist () {
+      this.$emit('CloseFilterModel', '111');
+    },
+    clearPrice () {
+
+    },
+    clearStops () {
+
+    },
+    clearDepartTime () {
+
+    },
+    clearArriveTime () {
+
+    },
+    clearAirline () {
+
+    }
+  }
+};
+</script>
+<style lang="scss">
+.price-func{
+  padding:0.18rem 0 0.4rem;
+  .mt-range-progress{
+    // height:0.06rem !important;
+    border-radius:0.04rem;
+    background: $green;
+  }
+  .mt-range-thumb{
+    width:0.4rem;
+    height:0.4rem;
+    top:50%;
+    left:0 !important;
+    transform:translateY(-50%);
+  }
+}
+.filter-checklist-data{
+  .mint-checklist-title{ display:none;}
+  .mint-cell{ min-height: 0;margin-bottom: 0.3rem;}
+  .mint-cell-wrapper, .mint-checklist-label{ padding:0;}
+  .mint-checkbox, .mint-checkbox-core{
+    width:0.3rem;
+    height:0.3rem;
+    background: #f6f6f6;
+    border-radius:0.04rem;
+  }
+  .mint-checkbox-label{
+    color: $lightBlack;
+    font-size: 0.24rem;
+    margin-left: 0.2rem;
+    line-height: 0.3rem;
+  }
+  .mint-checkbox-core{ border-radius:0.04rem;}
+  .mint-checkbox-input:checked + .mint-checkbox-core{
+    background-color: $green;
+    border-color: $green;
+  }
+  .mint-checkbox-core::after{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%) rotate(45deg) scale(0.8) !important;
+  }
+}
+</style>
+<style lang="scss" scoped>
+.filter{
+  width:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+.filter_header{
+  @include flexCenter;
+  justify-content: space-between;
+  padding:0.4rem 0.3rem;
+  background: #1D1D1D;
+}
+.filter_header-name{
+  font-size:0.36rem;
+  line-height:0.45rem;
+  letter-spacing: 1px;
+  color:rgba(255,255,255,1);
+}
+.btn-cancel{
+  font-size:0.24rem;
+  line-height:0.3rem;
+  color:rgba(205,205,205,1);
+  margin-right: 0.3rem;
+  background: transparent;
+}
+.btn-done{
+  font-size:0.28rem;
+  line-height:0.35rem;
+  font-weight:bold;
+  padding:0.07rem 0.3rem;
+  border-radius:0.08rem;
+  color:rgba(255,255,255,1);
+  background: $yellow;
+}
+.filter_detail{
+  padding-left:0.3rem;
+  padding-right:0.3rem;
+}
+// price filter
+.filter-title{
+  padding-top:0.3rem;
+  padding-bottom:0.3rem;
+  @include flexCenter;
+  justify-content: space-between;
+}
+.filter-title-name{
+  font-size:0.28rem;
+  line-height:0.35rem;
+  color:$lightBlack;
+  text-align: left;
+  font-weight: bold;
+}
+.filter-title-clear{
+  padding-left:0.2rem;
+  font-size:0.22rem;
+  line-height:0.27rem;
+  text-align: right;
+  cursor: pointer;
+}
+.price-data{
+  margin-bottom: 0.18rem;
+  font-size:0.32rem;
+  color:rgba(17,17,17,1);
+  font-weight: bold;
+  line-height:0.45rem;
+  .rs{
+    font-weight: bold;
+  }
+}
+// stops filter
+
+// depart-time filter
+
+// airline filter
+
+// show all
+.filter-all{
+  color:$green;
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+  margin-bottom:0.6rem;
+  cursor: pointer;
+  font-weight: bold;
+  position:relative;
+  span{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+}
+</style>

@@ -1,0 +1,29 @@
+<template>
+  <div>
+    <FlightDetails/>
+    <TravelerDetails/>
+    <couponInfo/>
+    <summaryInfo/>
+  </div>
+</template>
+<script>
+import FlightDetails from './FlightDetails';
+import TravelerDetails from './TravelerDetails';
+import couponInfo from './CouponInfo';
+import summaryInfo from './SummaryInfo';
+export default {
+  name: 'Home',
+  components: {
+    FlightDetails,
+    TravelerDetails,
+    couponInfo,
+    summaryInfo
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+
+</style>
+
+

@@ -1,0 +1,69 @@
+<template>
+  <div class="detail_city">
+    <p class="confirm-info-detail-title text-style">Manage Trip</p>
+    <ul>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Share Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Print Invoice</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Print Ticket</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Change Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Cancel Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+export default {
+  computed: {
+
+  },
+}
+</script>
+<style lang="scss" scoped>
+.marTopBom{
+  margin-bottom: 0.3rem;
+  margin-top: 0.4rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+}
+// manage
+.confirm-info-detail-manage{
+  padding:0.28rem 0;
+  border-bottom:1px solid #d8d8d8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.s-icon-datadown{
+  cursor: pointer;
+  transform: rotate(-90deg);
+}
+</style>

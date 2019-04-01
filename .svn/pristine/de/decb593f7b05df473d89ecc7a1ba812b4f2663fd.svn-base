@@ -1,0 +1,118 @@
+<template>
+  <div>
+    <div class="sign-pay">
+      <p class="sign-pay-text">This is a unpaid trip. Finish your payment in 30 minutes in case price changes.</p>
+      <a class="sign-pay-btn" href="/payment">Pay</a>
+    </div>
+    <div class="confirm-info">
+      <div class="confirm-info-detail-box">
+        <TripDetailCity :tripCity="tripInfo" />
+        <template v-for="item in tripInfo.travellerinfo" >
+          <TripDetailTraveller :key="item.id" :tripTraveller="item" />
+        </template>
+        <TripDetailContact :tripContact="tripInfo" />
+        <TripDetailPrice :tripPrice="tripManage" :tripList="tripList"/>
+        <TripDetailManage :tripManage="tripManage" />
+      </div>
+    </div>
+    <div class="need-pay">
+      <a class="need-pay-btn" href="/payment">Finish Payment</a>
+      <p class="need-pay-text">*This trip is booked with trip: <a class="green line_under" href="">1065498754</a></p>
+      <p class="need-pay-text">Payment will include both trips.</p>
+    </div>
+  </div>
+</template>
+<script>
+import TripDetailCity from './TripDetailCity';
+import TripDetailTraveller from './TripDetailTraveller';
+import TripDetailContact from './TripDetailContact';
+import TripDetailPrice from './TripDetailPrice';
+import TripDetailManage from './TripDetailManage';
+import { mapState } from 'vuex';
+export default {
+  components: {
+    TripDetailCity,
+    TripDetailTraveller,
+    TripDetailContact,
+    TripDetailPrice,
+    TripDetailManage
+  },
+  computed: {
+    ...mapState({
+      tripInfo: state => state.MyTripList.singleTripInfo,
+      tripList: state => state.MyTripList.tripDetailInfo,
+      tripManage: state => state.MyTripList.tripDetailInfo.order
+    })
+  }
+};
+</script>
+<style lang="scss" scoped>
+.sign-pay{
+  padding:0.12rem 0.3rem;
+  background: #1d1d1d;
+  margin-bottom: 0.3rem;
+  @include flexCenter;
+  justify-content: space-between;
+}
+.sign-pay-text{
+  width:4.7rem;
+  color:#fff;
+  font-size: 0.24rem;
+  line-height: 0.32rem;
+  letter-spacing:0.5px;
+}
+.sign-pay-btn{
+  width:1.34rem;
+  height:0.46rem;
+  color:#fff;
+  font-weight: bold;
+  margin-left:0.3rem;
+  padding:0 0.4rem;
+  font-size: 0.28rem;
+  line-height: 0.46rem;
+  background: $yellow;
+  border-radius: 0.08rem;
+}
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.confirm-info{
+  padding: 0 0.3rem;
+}
+.confirm-info-title{
+  font-size: 0.24rem;
+  color: $lighterBlack;
+}
+.info-title{
+  color: $lightBlack;
+}
+// payment
+.need-pay{
+  margin:0.4rem 0.5rem 0.6rem;
+  text-align: center;
+}
+.need-pay-btn{
+  display: block;
+  width:6.2rem;
+  height:0.84rem;
+  line-height:0.84rem;
+  color:#fff;
+  font-weight: 0.36rem;
+  font-weight: bold;
+  background: $yellow;
+  border-radius: 0.12rem;
+  margin-bottom: 0.3rem;
+}
+.need-pay-text{
+  font-size: 0.24rem;
+  color:$lightBlack;
+  line-height: 0.3rem;
+}
+.green{
+  color:$green;
+  cursor: pointer;
+}
+.line_under{
+  text-decoration: underline;
+}
+</style>

@@ -1,0 +1,40 @@
+// export default (url, )
+const dataFetch = (url, options = {}) =>
+  fetch(url, {
+    ...{
+      credentials: 'include'
+    },
+    ...options
+  })
+    .then(
+      response => (response.ok
+        ? response.json()
+        : Promise.reject(response.text())
+      ),
+      error => Promise.reject(error))
+    .catch(error => ({ error }));
+
+export const postFetch = (url, data, options = {}) =>
+  fetch(url, {
+    ...{
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    },
+    ...options
+  })
+    .then(
+      response => (response.ok
+        ? response.json()
+        : Promise.reject(response.text())
+      ),
+      error => Promise.reject(error)
+    ).catch(error => ({ error }));
+
+dataFetch.post = postFetch;
+
+export default dataFetch;

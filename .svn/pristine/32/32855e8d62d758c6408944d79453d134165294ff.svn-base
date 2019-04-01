@@ -1,0 +1,77 @@
+<template>
+<div  class="home-history">
+  <div class="home-history-title">
+    Search History
+    <i class="s-icon s-icon-nike"></i>
+  </div>
+  <div class="history-wrap">
+    <div class="history-items">
+      <div class="history-item" v-for="(val, idx) in historys" :key="idx">
+        <div class="history-item-city">
+          {{'DEL-BOM'}}
+        </div>
+        <div class="history-item-time">
+          Tue, 20 Nov
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      historys: '11111111111'.split('')
+    };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+  .home-history{
+    margin-bottom: 0.3rem;
+
+  }
+  .home-history-title{
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    font-size: 0.22rem;
+    color: $lightBlack;
+    font-weight: bold;
+  }
+  .history-wrap{
+    width: 100%;
+    overflow-x: scroll;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+  .history-items{
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    // padding: 0 0.3rem;
+  }
+  .history-item{
+    width: 2.93rem;
+    height: 1.2rem;
+    padding: 0.28rem 0.2rem;
+    margin-left: 0.2rem;
+    background-color: #fff;
+    box-shadow: 0rem 0.02rem 0.06rem 0rem rgba(174,174,174,0.5);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+
+  }
+  .history-item-city{
+    font-size: 0.24rem;
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+  }
+  .history-item-time{
+    font-size: 0.2rem;
+    color: $lightBlack;
+  }
+</style>

@@ -1,0 +1,56 @@
+<template>
+  <div>
+    <FlightDetails/>
+    <TravelerDetails/>
+    <couponInfo/>
+    <summaryInfo/>
+    <transition name="fade">
+      <div v-show="isShowTC">
+        <terms-condition></terms-condition>
+    </div>
+    </transition>
+  </div>
+</template>
+<script>
+import FlightDetails from './FlightDetails';
+import TravelerDetails from './TravelerDetails';
+import couponInfo from './CouponInfo';
+import summaryInfo from './SummaryInfo';
+import TermsCondition from '@/components/TC.vue';
+import EventHub from '@/utils/EventHub';
+export default {
+  name: 'Home',
+  data () {
+    return {
+      isShowTC: false
+    };
+  },
+  created () {
+    EventHub.$on('isShowTC', (val) => {
+      this.isShowTC = val;
+    });
+  },
+  components: {
+    FlightDetails,
+    TravelerDetails,
+    couponInfo,
+    summaryInfo,
+    TermsCondition
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+  .fade-enter-active,.fade-leave-active{
+    transition: all 5s ease-out;
+  }
+  .fade-enter{
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+  /* 出去终点 */
+  .fade-leave-active{
+    transform: translateY(0px);
+    opacity: 0;
+  }
+</style>

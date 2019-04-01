@@ -1,0 +1,73 @@
+import fetch from '@/utils/ApiUtils';
+import { queryUserOrderNew, queryUserOrderDetail } from '@/constants/ApiConstants';
+export const MyTripList = {
+  state: {
+    status: 1,
+    totalPage: 1,
+    isLoading: false,
+    departOrReturn: 0,
+    isMoreLoading: false,
+    triplistArray: [],
+    tripDetailInfo: {},
+    singleTripInfo: {},
+    otherSingleTripInfo: {},
+    tripDetailInfoChange: [],
+    tripDetailInfoChange2: [],
+    statusList: ['', 'Upcoming', 'To be paid', 'compeleted', 'Canceled']
+  },
+  actions: {
+    selectDiffStatus ({ commit, state }, type) {
+      state.triplistArray = [];
+      state.status = type;
+      commit('saveMyTripList', type);
+    },
+    firstInToInitData ({ state }, status) {
+      state.triplistArray = [];
+      state.status = status;
+    }
+  },
+  mutations: {
+    changeLoadMoreState (state, val) { // 控制下拉刷新
+      state.isLoading = val;
+      state.isMoreLoading = val;
+    },
+    saveMyTripList (state, status) { // 更新数据triplist
+      let data = {
+        pageNum: 1,
+        pageSize: 8,
+        status: state.statusList[status]
+      };
+      fetch.post(queryUserOrderNew, data, { headers: {
+        'Content-Type': 'application/json'
+      } }).then(res => {
+        if (res.code === 0) {
+          let arr = res.data.list;
+          state.totalPage = Math.ceil(res.data.totalSize / res.data.list.length);
+          state.triplistArray.push(...arr);
+          state.isLoading = false;
+          state.isMoreLoading = false;
+        }
+      })
+    },
+    saveSearchDetailInfo (state, data) { // 获取trip detail
+      let url = `${queryUserOrderDetail}?tripId=${data}`
+      fetch(url).then(res => {
+        if (res.code === 0) {
+          state.tripDetailInfo = res.data;
+          res.data.triplist.forEach((e, i) => {
+            if (e.id === data) {
+              state.departOrReturn = i + 1;
+              state.singleTripInfo = res.data.triplist[i];
+              state.tripDetailInfoChange = res.data.triplist[i].travellerinfo;
+            } else {
+              state.otherSingleTripInfo = res.data.triplist[i];
+              state.tripDetailInfoChange2 = res.data.triplist[i].travellerinfo;
+            }
+          });
+        } else {
+          console.log(`%c ${res.code} --> ${res.message}`, 'color:red;');
+        }
+      })
+    }
+  }
+};

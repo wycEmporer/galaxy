@@ -1,0 +1,38 @@
+<template>
+  <div class="calendar-table">
+    <div class="calendar-header">
+      <div class="calendar-header-text">{{dateType === 0 ? 'Select departure date' : 'Select arrival date'}}</div>
+      <div class="calendar-weeks">
+        <span class="calendar-week" v-for="(w, idx) in week" :key="idx">{{w}}</span>
+      </div>
+      <div class="days">
+        <div class="day" v-for="(dayObj, index) in days" :key="index">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['dateType'],
+  data () {
+    return {
+      week: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+    };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+  .calendar-weeks{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .calendar-week{
+    font-size: 0.28rem;
+    font-weight: bold;
+  }
+</style>

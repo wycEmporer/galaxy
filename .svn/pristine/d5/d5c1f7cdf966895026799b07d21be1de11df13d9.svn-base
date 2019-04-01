@@ -1,0 +1,118 @@
+<template>
+  <div class="travelers-info">
+    <p class="traveler-info-title">Traveler 1</p>
+    <form action="">
+      <div class="travelers-info-sex">
+        <label for="male" @click="checkSex(true)" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Male</label>
+        <input name="sex" class="hide" id="male" type="radio" value="1" checked="checked"/>
+        <label for="female" @click="checkSex(false)" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class=" !isChecked ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Female</label>
+        <input name="sex" class="hide" id="female" value="0" type="radio" />
+      </div>
+      <div class="travelers-info-name">
+        <label for="" class="s-traveler-general ">First Name</label>
+        <input type="text" name="firstName" class="travelers-info-name-input">
+        <label for="" class="s-traveler-general">Last Name</label>
+        <input type="text" name="lastName" class="travelers-info-name-input">
+      </div>
+      <div class="travelers-info-date">
+        <label for="" class="s-traveler-general">Date of Birth</label>
+        <div class="travelers-info-date-box">
+          <input type="text" readonly name="firstName" class="travelers-info-date-input">
+          <i class="s-icon s-icon-datadown"></i>
+        </div>
+        <label for="" class="s-traveler-general">Nationality</label>
+        <div class="travelers-info-date-box">
+          <input type="text" readonly name="lastName" class="travelers-info-date-input">
+          <i class="s-icon s-icon-datadown"></i>
+        </div>
+      </div>
+      <div class="passport-info-date">
+        <label for="" class="s-traveler-general">Passport No.</label>
+        <div class="passport-info-date-box">
+          <input type="text" name="passportNo" class="travelers-info-name-input">
+        </div>
+        <label for="" class="s-traveler-general">Passport Expiry Date</label>
+        <div class="travelers-info-date-box">
+          <input type="text" readonly name="lastName" class="travelers-info-date-input">
+          <i class="s-icon s-icon-datadown"></i>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data(){
+    return {
+      isChecked : true
+    }
+  },
+  methods:{
+    checkSex(check){
+      console.log(this.isChecked);
+      if(check != this.isChecked){
+         this.isChecked = !this.isChecked;
+      }
+     
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .s-traveler-general{
+    font-size: 0.32rem;
+    color: #111;
+  }
+  .travelers-info{
+    margin-top: 10px;
+  }
+  .traveler-info-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: $lightBlack;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .travelers-info-sex{
+    line-height: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .travelers-info-sex-label{
+    margin-right: 0.6rem;
+  }
+
+  .travelers-info-name-input{
+    display: block;
+    width: 100%;
+    height:0.82rem;
+    background:rgba(250,250,250,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    margin: 0.2rem 0;
+    padding: 4px 10px;
+    &:focus{
+      border:0.01rem solid rgba(1,121,89,1);
+    }
+  }
+  .travelers-info-date-box{
+    width:100%;
+    height:0.82rem;
+    margin: 0.2rem 0;
+    position: relative;
+  }
+  .travelers-info-date-box .s-icon{
+    position: absolute;
+    right: 0.2rem;
+    top: 0.36rem;
+  }
+  .travelers-info-date-input{
+    width: 100%;
+    height: 100%;
+    background:rgba(234,234,234,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    padding: 4px 10px;
+  }
+</style>

@@ -1,0 +1,215 @@
+<template>
+  <form class="cancel-trip-warp" id="cancel_form" >
+    <p>
+      <span class="cancel-trip-title lighterBlack">Trip ID :</span>
+      <span class="cancel-trip-title lightBlack"> 987654321987654321</span>
+    </p>
+    <div class="cancel-trip-select">
+      <p class="cancel-trip-select-titel lightBlack">Select Traveler</p>
+      <div class="cancel-trip-select-travele">
+        <input type="checkbox" v-model="checked" id="cancel-checkbox" name="checked" class="hide">
+        <label for="cancel-checkbox"  class="lightBlack"> <i class="s-icon" :class="checked ? 's-icon-select' : 's-icon-unselect'"></i> Secure trip</label>
+      </div>
+    </div>
+    <div class="cancel-trip-details ">
+      <p class="cancel-trip-details-title lightBlack">Select Cancellation Reason</p>
+      <div class="cancel-trip-details-reason">
+        <div class="cancel-trip-details-reason-item">
+          <label for="reason" class="cancel-trip-details-label"><i class="s-icon" :class="isChecked == 0 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;My plan changed</label>
+          <input name="reason" class="hide" id="reason" type="radio" value="0" v-model="isChecked"/>
+        </div>
+        <div class="cancel-trip-details-reason-item">
+          <label for="reason_1" class="cancel-trip-details-label"><i class="s-icon" :class="isChecked == 1 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;I cancelled dirrectly from airline with full refund</label>
+          <input name="reason" class="hide" id="reason_1" type="radio" value="1" v-model="isChecked"/>
+        </div>
+        <div class="cancel-trip-details-reason-item">
+          <label for="reason_2" class="cancel-trip-details-label"><i class="s-icon" :class="isChecked == 2 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;I cancelled directly from airline with penalty applied</label>
+          <input name="reason" class="hide" id="reason_2" type="radio" value="2" v-model="isChecked"/>
+        </div>
+        <div class="cancel-trip-details-reason-item">
+          <label for="reason_3" class="cancel-trip-details-label"><i class="s-icon" :class="isChecked == 3 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Flight was canceled by airline</label>
+          <input name="reason" class="hide" id="reason_3" type="radio" value="3" v-model="isChecked"/>
+          <div class="cancel-trip-details-uploadfile">
+            <p class="cancel-trip-details-uploadfile-text">To proceed your request, airline requests stamp copy or screenshot of SMS/Email that proves the cancellation or re-schedule of your flight.</p>
+            <p class="cancel-trip-details-uploadfile-title">Attach File: </p>
+            <label for="uploadfile" class="cancel-trip-details-uploadfile-label">Upload</label>
+            <input type="file" name="uploadfile" id="uploadfile" class="hide" @change="upLoadFile"/>
+            <div class="uploading_file_box">
+              <p class="uploading_file_name"><i></i>{{fileObj.name}}</p>
+              <p class="uploading_file_loading" v-if="true">Uploading</p>
+              <button class="uploading_file_remove" v-else @click.prevent="fileObj = {}">Remove</button>
+            </div>
+          </div>
+        </div>
+        <div class="cancel-trip-details-reason-item">
+          <label for="reason_4" class="cancel-trip-details-label"><i class="s-icon" :class="isChecked == 4 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Flight was re-scheduled by airline</label>
+          <input name="reason" class="hide" id="reason_4" type="radio" value="4" v-model="isChecked"/>
+        </div>
+      </div>
+    </div>
+    <div class="cancel-trip-details-policy">
+      <p class="cancel-trip-select-titel lightBlack">Cancellation Policy</p>
+      <ul class="cancel-trip-details-policy-text">
+        <li class="cancel-trip-details-policy-text-item">In case of flown tickets, no refund will be applicable.</li>
+        <li class="cancel-trip-details-policy-text-item">Fare will be refunded to the account used for booking.</li>
+        <li class="cancel-trip-details-policy-text-item">The refund amount calculated is based on the fare rules & restrictions and flight booking policy, hence the final amount may vary from the original price.</li>
+        <li class="cancel-trip-details-policy-text-item">
+          <p>Refund will be processed in sequence below as per the mode of payment you opted while booking:</p>
+          <p>1. Happy Silver</p>
+          <p>2. Happy Gold</p>
+          <p>3. Account/Cards</p>
+        </li>
+        <li class="cancel-trip-details-policy-text-item">Coupon applied will be deducted from the refundable amount.</li>
+      </ul>
+      <p class="cancel-trip-details-policy-text-item">After cancellation, HEG will send you the complete break.</p>
+    </div>
+    <div class="cancel-trip-details-submit">
+      <button class="cancel-trip-details-submit-btn" @click.prevent="submitCancel">Submit</button>
+    </div>
+  </form>
+</template>
+<script>
+import { ScrollToPageTop } from '@/utils/ScrollToPageTop';
+export default {
+  name: 'Home',
+  components: {
+
+  },
+  data () {
+    return {
+      isChecked: 0,
+      checked: true,
+      message: '',
+      fileObj: ''
+    };
+  },
+  methods: {
+    upLoadFile (file) {
+      this.fileObj = file.srcElement.files[0];
+      let formdata = new FormData(document.getElementById('cancel_form'));
+      console.log(this.fileObj);
+      formdata.append('uploadfile', this.fileObj);
+      formdata.append('typeId', '125dc0d6-4084-11e9-93e2-000c29231d9f');
+      const config = {
+        onUploadProgress: progressEvent => {
+          var complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%';
+          this.progress = complete;
+        }
+      };
+      this.$http.post('/upload/extract.do', formdata, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }, config).then(res => {
+        console.log(res);
+      });
+    },
+    submitCancel () {
+      console.log('submit');
+    }
+  },
+  mounted () {
+    ScrollToPageTop('cancel-trip-warp');
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .lightBlack{
+   color: $lightBlack;
+  }
+  .lighterBlack{
+    color: $lighterBlack;
+  }
+  .s-icon{
+    vertical-align: middle;
+    margin-right: 0.2rem;
+  }
+  .cancel-trip-warp{
+    padding: 0rem 0.3rem;
+    font-size: 0.24rem;
+  }
+  .cancel-trip-select{
+    margin-top: 0.3rem;
+  }
+  .cancel-trip-details-title,
+  .cancel-trip-select-titel{
+    margin: 0.3rem 0;
+    font-weight: 700;
+  }
+  .cancel-trip-details-reason-item{
+    margin-bottom: 0.3rem;
+  }
+  .cancel-trip-details-label{
+    font-size:0.24rem;
+    color:rgba(102,102,102,1);
+    line-height:0.36rem;
+  }
+  .cancel-trip-details-uploadfile-text{
+    font-size:0.22rem;
+    color:rgba(153,153,153,1);
+    line-height:0.33rem;
+    margin: 0.3rem 0;
+  }
+  .cancel-trip-details-uploadfile-title{
+    font-size:0.24rem;
+    font-weight:bold;
+    color:rgba(102,102,102,1);
+    line-height:0.3rem;
+    margin-bottom: 0.2rem;
+  }
+  .cancel-trip-details-uploadfile-label{
+    display: inline-block;
+    width:1.57rem;
+    height:0.44rem;
+    background:rgba(227,164,40,1);
+    border-radius:0.04rem;
+    font-size:0.24rem;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    line-height:0.44rem;
+    text-align: center;
+  }
+  .cancel-trip-details-policy-text{
+    padding-left: 0.3rem;
+  }
+  .cancel-trip-details-policy-text-item{
+    font-size:0.22rem;
+    color:rgba(153,153,153,1);
+    line-height:0.33rem;
+    margin-bottom: 0.15rem;
+    list-style: disc;
+    &>p{
+      line-height: 0.3rem;
+      color:rgba(153,153,153,1);
+    }
+  }
+  .cancel-trip-details-submit{
+    text-align: center;
+    margin: 0.4rem 0 0.6rem;
+  }
+  .cancel-trip-details-submit-btn{
+    width:6.2rem;
+    height:0.84rem;
+    background:rgba(227,164,40,1);
+    border-radius:0.12rem;
+    font-size:0.36rem;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    line-height:0.84rem;
+  }
+  // fileupload
+  .uploading_file_box {
+    @include flexCenter;
+    justify-content: space-between;
+  }
+  .uploading_file_name{
+
+  }
+  .uploading_file_loading{
+    color:$lighterBlack;
+    font-size: 0.2rem;
+    line-height: 0.25rem;
+  }
+  .uploading_file_remove{
+    color:$green;
+    background: transparent;
+  }
+</style>

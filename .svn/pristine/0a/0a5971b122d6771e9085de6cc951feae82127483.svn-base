@@ -1,0 +1,11 @@
+export const TripList = {
+  state: {
+
+  },
+  actions: {
+
+  },
+  mutations: {
+
+  }
+};

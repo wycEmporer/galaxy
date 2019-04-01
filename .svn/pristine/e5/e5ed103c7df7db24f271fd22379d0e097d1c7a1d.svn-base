@@ -1,0 +1,69 @@
+<template>
+  <div class="home-offer-wrap">
+    <div class="home-offer-title">
+       Check out our latest offer
+    </div>
+    <div class="home-offers">
+      <div class="home-offer">
+        <img src="https://img.happyeasygo.com/img/1548402596691.jpg" alt="" class="home-offer-ban">
+        <div class="home-offer-sum">
+          <div class="home-offer-main">Save Up to [30%]</div>
+          <div class="home-offer-text">Upto Rs. 1000 off on Domestic Flights</div>
+          <div class="home-offer-valid">Valid till: 30 Nov, 2018</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+
+}
+</script>
+<style lang="scss" scoped>
+.home-offer-title{
+  padding: 0 0.3rem;
+  font-size: 0.28rem;
+  font-weight: bold;
+  color: $lightBlack;
+  margin-bottom: 0.2rem;
+}
+.home-offer{
+  padding-left: 0.3rem;
+}
+.home-offer{
+  width:4.2rem;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0.12rem;
+  & + {
+    .home-offer{
+      margin-left: 0.2rem;
+    }
+  }
+}
+.home-offer-ban{
+  width: 4.2rem;
+  height: 2.2rem;
+
+}
+.home-offer-sum{
+  padding: 0.1rem 0.2rem;
+}
+.home-offer-main{
+  font-size: 0.28rem;
+  color: $green;
+  font-weight: bold;
+  margin-bottom: 0.1rem;
+}
+.home-offer-text{
+  font-size: 0.22rem;
+  margin-bottom: 0.1rem;
+  color: $lightBlack;
+}
+.home-offer-valid{
+  font-size: 0.18rem;
+  color: $lightBlack;
+}
+</style>

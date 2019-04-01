@@ -1,0 +1,132 @@
+<template>
+  <div>
+    <div class="coupon-info">
+      <p class="coupon-info-title">Apply Coupon</p>
+      <div class="coupon-info-code">
+        <input type="text" name="couponCode" class="coupon-info-input" v-model="couponCode">
+        <button class="btn coupon-info-btn" @click="getCoupon">Apply</button>
+      </div>
+      <div class="coupon-info-codeDetails" v-if="isCouponUse">
+        <div class="coupon-info-codeDetails-success">
+          <p class="coupon-info-codeDetails-success-num"><i class="s-icon s-icon-nike"></i> Coupon:{{couponCode}}</p>
+          <p class="coupon-info-codeDetails-success-price">saved Rs 1,010</p>
+        </div>
+        <div class="coupon-info-code-remove" @click="removeCoupon">remove</div>
+      </div>
+      <div class="coupon-info-codeDetails-fail" v-if="!isCouponUse">
+        <p class="coupon-info-codeDetails-fail-text">{{couponFailMsg}}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      couponCode: '',
+      isCouponUse: false,
+      couponFailMsg: ''
+    }
+  },
+  methods: {
+    getCoupon () {
+      const queryData = {
+        countryType: 0,
+        couponCode: this.couponCode,
+        device: 'PC',
+        deviceType: 1,
+        flightFromRequestList: [{
+          CabinClass: '',
+          aircompany: 'G8',
+          bst: 1394,
+          flightNumber: 'G8334',
+          gst: 903,
+          startDate: '2019/09/20 08:00',
+          type: 1
+        }],
+        orderNumber: 1,
+        productType: 1,
+        totalPrice: 2297,
+        tripType: 1
+      };
+      this.$http.post('/heg_api/coupon/GetCoupon.do', queryData).then((res) => {
+        if (res.success) {
+          this.isCouponUse = true;
+        } else {
+          this.couponFailMsg = res.datamessage;
+        }
+      })
+    },
+    removeCoupon () {
+      this.isCouponUse = false;
+      this.couponCode = '';
+    }
+  },
+  mounted () {
+
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .coupon-info{
+    padding: 0 0.3rem;
+  }
+  .coupon-info-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .coupon-info-code{
+    display: flex;
+  }
+  .coupon-info-input{
+    width:4.6rem;
+    height:0.54rem;
+    // background:rgba(216,216,216,1);
+    border-bottom:0.01rem solid rgba(220,220,220,1);
+    margin-right: 0.2rem;
+  }
+  .coupon-info-btn{
+    width:1.8rem;
+    height:0.54rem;
+    background:rgba(227,164,40,1);
+    border-radius:0.08rem;
+    font-size: 0.24rem;
+    color: white;
+    font-weight: 700;
+  }
+  .coupon-info-codeDetails-success{
+    display: flex;
+    margin: 0.3rem 0 0.1rem;
+  }
+  .coupon-info-codeDetails-success-num{
+    width: 60%;
+    font-size: 0.24rem;
+    color:rgba(102,102,102,1);
+    line-height:0.3rem;
+  }
+  .coupon-info-codeDetails-success-price{
+    width: 40%;
+    text-align: right;
+    font-size: 0.28rem;
+    color:rgba(17,17,17,1);
+    line-height:0.35rem;
+  }
+  .coupon-info-codeDetails-fail{
+    margin: 0.2rem 0 0.1rem;
+  }
+  .coupon-info-codeDetails-fail-text{
+    font-size: 0.24rem;
+    color: red;
+  }
+  .coupon-info-code-remove{
+    font-size: 0.28rem;
+    color:$green;
+    line-height:0.35rem;
+    text-align: right;
+  }
+</style>

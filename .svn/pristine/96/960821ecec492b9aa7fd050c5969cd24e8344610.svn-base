@@ -1,0 +1,87 @@
+import * as type from '../type';
+// ({ state, commit, rootState })
+// sumWithRootCount (state, getters, rootState)
+
+export const SearchForm = {
+
+  state: {
+    tripType: 0,
+    selectedCitys: [{}, {}],
+    cityType: 0, // 出发地， 目的地
+    dateType: 0, //  去程 时间，回程时间
+    departDate: new Date(),
+    arriveDate: new Date(),
+    passengers: {
+      adult: 1,
+      child: 0,
+      infant: 0
+    },
+    showCityLayer: false,
+    showCalendarLayer: false,
+    showPassengerLayer: false
+  },
+  actions: {
+    // checkout ({ commit, state }, products) {
+    //   // 把当前购物车的物品备份起来
+    //   const savedCartItems = [...state.cart.added];
+    //   // 发出结账请求，然后乐观地清空购物车
+    //   commit(types.CHECKOUT_REQUEST);
+    //   // 购物 API 接受一个成功回调和一个失败回调
+    //   shop.buyProducts(
+    //     products,
+    //     // 成功操作
+    //     () => commit(types.CHECKOUT_SUCCESS),
+    //     // 失败操作
+    //     () => commit(types.CHECKOUT_FAILURE, savedCartItems)
+    //   );
+    // }
+
+    // async actionA ({ commit }) {
+    //   commit('gotData', await getData())
+    // },
+    // async actionB ({ dispatch, commit }) {
+    //   await dispatch('actionA') // 等待 actionA 完成
+    //   commit('gotOtherData', await getOtherData())
+    // }
+  },
+  getters: {
+    getTodoById: (state) => (id) => {
+      return state.todos.find(todo => todo.id === id);
+    }
+  },
+  mutations: {
+    [type.CHANGE_TYPE] (state, type) {
+      state.tripType = type;
+    },
+    [type.SET_CITY] (state, cityObj) {
+      state.showCityLayer = false;
+      if (!cityObj) return;
+      state.selectedCitys.splice(state.cityType, 1, cityObj);
+    },
+    [type.SET_CITY_TYPE] (state, cityType) {
+      state.cityType = cityType;
+      state.showCityLayer = true;
+    },
+    [type.SET_DATE_TYPE] (state, dateType) {
+      state.dateType = dateType;
+      state.showCalendarLayer = true;
+    },
+    [type.SET_DATE] (state, date) {
+      state.showCalendarLayer = false;
+      if (!date) return;
+      if (state.dateType === 0) {
+        state.departDate = date;
+      } else {
+        state.arriveDate = date;
+      }
+    },
+    [type.SET_PASSENGER] (state, passengers) {
+      state.showPassengerLayer = false;
+      if (!passengers) return;
+      state.passengers = { ...state.passengers, ...passengers };
+    },
+    [type.OPEN_PASSENGER] (state) {
+      state.showPassengerLayer = true;
+    }
+  }
+};

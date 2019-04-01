@@ -1,0 +1,120 @@
+<template>
+  <div class="trip_list"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="isMoreLoading"
+    :infinite-scroll-immediate-check="true"
+    infinite-scroll-distance="10"
+    >
+    <template v-for="(item, index) in triplist">
+      <div class="list_child" :key="index">
+        <TripInfoPart :flightInfo="item" ></TripInfoPart>
+        <div >
+          <button class="list_btn">Pay Now</button>
+        </div>
+      </div>
+    </template>
+    <div class="loading-box" v-show="isLoading">
+      <mt-spinner type="fading-circle" :size='30'></mt-spinner>
+      <span class="loading-more-txt">loading ...</span>
+    </div>
+  </div>
+</template>
+<script>
+import { Indicator, Spinner } from 'mint-ui';
+export default {
+  components: {
+    'mt-spinner': Spinner,
+    TripInfoPart: () => import('@/components/TripInfoPart')
+  },
+  data () {
+    return {
+      isLoading: false,
+      isMoreLoading: true,
+      loadInfo: {
+        pageNum: 1,
+        pageSize: 5,
+        totalPage: 3
+      },
+      triplist: [
+        { id: 0, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 1, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 2, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 3, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 4, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 5, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 6, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 7, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') }
+      ]
+    };
+  },
+  created () {
+    this.loadMore();
+  },
+  methods: {
+    loadMore () {
+      // Indicator.open({
+      //   spinnerType: 'fading-circle'
+      // });
+      this.loadInfo.pageNum += 1;
+      this.isMoreLoading = true;
+      this.isLoading = true;
+      console.log(this.triplist.length);
+      if (this.loadInfo.pageNum > this.loadInfo.totalPage) {
+        // Indicator.close();
+        this.isLoading = false;
+        return false;
+      }
+      setTimeout(() => {
+        this.searchOrder();
+      }, 1000);
+    },
+    searchOrder () {
+      let arr = [
+        { id: 5, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 6, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 7, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') }
+      ];
+      this.triplist.push(...arr);
+      Indicator.close();
+    }
+  }
+};
+</script>
+<style lang="scss">
+.trip_list .mint-spinner-fading-circle{
+  margin:auto;
+}
+</style>
+<style lang="scss" scoped>
+// .user_trip{}
+.trip_list{
+  background: rgb(241,241,241);
+  overflow: hidden;
+  padding:0.3rem;
+}
+.list_child{
+  @include flexCenter;
+  justify-content: space-between;
+  background: #fff;
+  padding:0.2rem 0.3rem;
+  margin-bottom: 0.2rem;
+  border-radius:0.12rem;
+  box-shadow:0rem 0.02rem 0.06rem 0rem rgba(174,174,174,0.5);
+}
+.list_btn{
+  width:1.57rem;
+  height:0.44rem;
+  line-height: 0.44rem;
+  color:#fff;
+  background:rgba(227,164,40,1);
+  border-radius:0.04rem;
+  font-weight: bold;
+}
+// loading...
+.loading-box {
+  text-align: center;
+}
+.loading-more-txt {
+  font-size: 0.18rem;
+}
+</style>

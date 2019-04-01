@@ -1,0 +1,97 @@
+<template>
+  <div class="list" >
+    <template v-if="true">
+      <div v-for="(item, index) in onewaylist.flightArray" :key="index">
+        <Oneway :flightInfo="item" :advImagelist="advImagelist" @click.native="selectOneFlight(item)" />
+        <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+          <img :src="advImagelist[parseInt(index / 4)]" alt="">
+        </div>
+      </div>
+    </template>
+    <template v-if="false">
+      <div v-show="showDepartList && roundlist.departFlightArray">
+        <div v-for="(item, index) in roundlist.departFlightArray" :key="index">
+          <Oneway :flightInfo="item" :advImagelist="advImagelist" @click.native="selectRoundFlight(1, item)" />
+          <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+            <img :src="advImagelist[parseInt(index / 4)]" alt="">
+          </div>
+        </div>
+      </div>
+      <div v-show="showReturnList && roundlist.returnFlightArray">
+        <div v-for="(item, index) in roundlist.returnFlightArray" :key="index">
+          <Oneway :flightInfo="item" :advImagelist="advImagelist" @click.native="selectRoundFlight(2, item)" />
+          <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+            <img :src="advImagelist[parseInt(index / 4)]" alt="">
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-if="false" >
+      <div v-for="(item, index) in Interlist" :key="index">
+        <International :flightInfo ="item" :advImagelist="advImagelist" @click.native="selectIntFlight(item)" />
+        <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+          <img :src="advImagelist[parseInt(index / 4)]" alt="">
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+<script>
+import Oneway from '@/components/flightInfo.vue';
+import International from '@/components/flightInfoInter.vue';
+import { mapState } from 'vuex';
+export default {
+  props: ['advImagelist'],
+  components: {
+    Oneway,
+    International
+  },
+  data () {
+    return {
+      showDepartList: true,
+      showReturnList: false
+    };
+  },
+  computed: {
+    ...mapState({
+      onewaylist: state => state.FlightInfo.onewayArray,
+      roundlist: state => state.FlightInfo.roundwayArray,
+      Interlist: state => state.FlightInfo.IntlFlightArray
+    })
+  },
+  methods: {
+    selectOneFlight (data) {
+      console.log(data);
+      window.location.href = 'http://127.0.0.1:3000/confirm';
+    },
+    selectRoundFlight (type, data) {
+      console.log(type === 1 ? 'depart:' : 'return', data);
+      if (type === 1) {
+        this.showDepartList = false;
+        this.showReturnList = true;
+        this.$emit('selectReturnFlight');
+      } else {
+        this.showDepartList = false;
+        this.showReturnList = false;
+      }
+    },
+    selectIntFlight (data) {
+      console.log(data);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.list{
+  padding:0.3rem;
+  background: #f1f1f1;
+}
+//adv_images
+.adv_images img{
+  width:6.6rem;
+  // height:1.5rem;
+  vertical-align: top;
+  margin-bottom: 0.2rem;
+  border-radius:0.04rem;
+}
+</style>

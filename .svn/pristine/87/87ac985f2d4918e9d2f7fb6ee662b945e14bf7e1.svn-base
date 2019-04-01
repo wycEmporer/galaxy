@@ -1,0 +1,116 @@
+<template>
+  <div class="confirm-info">
+    <div class="confirm-info-detail-box">
+      <p class="confirm-info-title clear">Order ID : <span class="info-title">{{orderId}}</span>
+        <span class="order_status">Upcoming</span>
+      </p>
+      <p class="confirm-info-title2 marBot20">Booking Time: {{getHFWDMY(new Date(tripInfo.creatTime))}}</p>
+      <p class="confirm-info-detail-title2 text-style clear">
+        {{voyageInfo.dc}} - {{voyageInfo.ac}}
+        <span class="trip-status" :class="orderInfo.status?'issuing':'issued'">
+          <i v-if="!orderInfo.status" class="s-icon s-icon-checkCoupon"></i>
+          {{orderInfo.status?'issuing ...':'issued'}}
+        </span>
+      </p>
+      <p class="confirm-info-detail-title2 text-style marBot20 clear">One Way Trip</p>
+      <template v-for="(item, key) in trip.triplist">
+        <TripDetailCity :tripCity="item" :key="key"/>
+      </template>
+      <TripDetailTraveller :tripTraveller="travellerinfo" />
+      <TripDetailContact :tripContact="tripInfo" />
+      <TripDetailPrice :tripPrice="orderInfo" :tripList="trip" />
+      <TripDetailManage :tripManage="orderInfo" />
+    </div>
+  </div>
+</template>
+<script>
+import TripDetailCity from './TripDetailCity';
+import TripDetailTraveller from './TripDetailTraveller';
+import TripDetailContact from './TripDetailContact';
+import TripDetailPrice from './TripDetailPrice';
+import TripDetailManage from './TripDetailManage';
+import { mapState } from 'vuex';
+import { getHFWDMY } from '@/utils/DateFormatUtils';
+export default {
+  components: {
+    TripDetailCity,
+    TripDetailTraveller,
+    TripDetailContact,
+    TripDetailPrice,
+    TripDetailManage
+  },
+  data () {
+    return {
+      getHFWDMY
+    }
+  },
+  computed: {
+    ...mapState({
+      orderId: state => state.MyTripList.orderId,
+      trip: state => state.MyTripList.tripDetailInfo,
+      tripInfo: state => state.MyTripList.tripInfo,
+      orderInfo: state => state.MyTripList.orderInfo,
+      voyageInfo: state => state.MyTripList.voyageInfo,
+      travellerinfo: state => state.MyTripList.travellerinfo
+    })
+  }
+};
+</script>
+<style lang="scss" scoped>
+.confirm-info{
+  padding: 0 0.3rem;
+}
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.marBot30{
+  margin-bottom: 0.3rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.confirm-info-title{
+  font-size: 0.24rem;
+  line-height: 0.48rem;
+  color: $lighterBlack;
+}
+.confirm-info-title2{
+  font-size: 0.24rem;
+  color: $lighterBlack;
+}
+.order_status{
+  float: right;
+  width:2.2rem;
+  height:0.48rem;
+  color:#fff;
+  text-align: center;
+  border-radius:0.24rem;
+  background: $lighterBlack;
+}
+.info-title{
+  color: $lightBlack;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+}
+.confirm-info-detail-title2{
+  font-size:0.32rem;
+  line-height:0.39rem;
+  color:rgba(0,0,0,1);
+  font-weight: bold;
+}
+.trip-status{
+  float: right;
+  height:0.27rem;
+  color:#333;
+  font-size: 0.24rem;
+}
+.issued{
+  color:$green;
+}
+.issuing{
+  color:$yellow;
+}
+</style>

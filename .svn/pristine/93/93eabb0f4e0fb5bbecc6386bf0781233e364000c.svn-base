@@ -1,0 +1,21 @@
+<template>
+  <div class="user_trip">
+    <div>
+      <!-- <TabBar></TabBar> -->
+    </div>
+  </div>
+</template>
+<script>
+import TripInfoPart from '';
+export default {
+  components: {
+    // TabBar: () => import('@/components/TabBar')
+  },
+  data () {
+    return {};
+  }
+}
+</script>
+<style lang="scss" scoped>
+
+</style>

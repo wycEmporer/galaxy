@@ -1,0 +1,258 @@
+<template>
+  <div class="confirm-info">
+    <p class="confirm-info-title marBot20">Trip ID : <span class="info-title">987654321987654321</span></p>
+    <div class="confirm-info-detail-box">
+      <div class="confirm-info-detail">
+        <p class="confirm-info-detail-title2 text-style marBot20">Flight Info</p>
+        <p class="confirm-info-detail-title text-style marBot30">Dubai(DXB) - Mumbai(BOM)</p>
+        <ul>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Operated by:</div>
+            <div class="text-style s-confirm-general-val"> Cathay Pacific</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Departure : </div>
+            <div class="text-style s-confirm-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Arrival:</div>
+            <div class="text-style s-confirm-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Flight Duration:</div>
+            <div class="text-style s-confirm-general-val">2h15m, none-stop</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Baggage Policy:</div>
+            <div class="text-style s-confirm-general-val">1 checkin luggage ( &lt; 10kg ), 1 cabin luggage ( &lt; 28 kg )</div>
+          </li>
+        </ul>
+      </div>
+      <p class="confirm-info-refundable">none-refundable</p>
+    </div>
+    <div class="confirm-info-detail-box">
+      <div class="confirm-info-detail">
+        <p class="confirm-info-detail-title2 text-style marBot20">Traveler Info</p>
+        <p class="confirm-info-detail-title marBot30">Mr. Cheng, Fei Fan </p>
+        <ul>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">First Name:</div>
+            <div class="text-style s-confirm-general-val">Fei-Fan</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Last Name:</div>
+            <div class="text-style s-confirm-general-val">Cheng</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Date of Birth:</div>
+            <div class="text-style s-confirm-general-val">Mar 3,1994</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Nationality:</div>
+            <div class="text-style s-confirm-general-val">India</div>
+          </li>
+        </ul>
+      </div>
+      <div class="confirm-info-detail">
+        <p class="confirm-info-detail-title2 text-style marTopBom">Contact Info</p>
+        <ul>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Name:</div>
+            <div class="text-style s-confirm-general-val">Fei-Fan Cheng</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Phone:</div>
+            <div class="text-style s-confirm-general-val">+886 975217668</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">E-mail:</div>
+            <div class="text-style s-confirm-general-val">iancheng0323@gmail.com</div>
+          </li>
+        </ul>
+      </div>
+      <div class="confirm-info-detail">
+        <p class="confirm-info-detail-title2 text-style marTopBom">Price Detail</p>
+        <p class="text-style">Note: This trip is booked with trip <a class="green">1065498754</a></p>
+        <p class="text-style">Pricing detail below contains both trip.</p>
+        <ul>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Base fare</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Taxes &amp; Fees</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Convenience Fee</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Customer Prom</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Insurance</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price space-line">
+            <div class="text-style s-confirm-general-key">Grand Total</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price">₹ 1325</div>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-item-price">
+            <div class="text-style s-confirm-general-key">Coupon</div>
+            <div class="text-style s-confirm-general-val s-confirm-general-val-price green">- ₹ 325</div>
+          </li>
+        </ul>
+        <div class="confirm-info-detail-item confirm-info-detail-total">
+          <div class="text-style s-confirm-general-total-key">total</div>
+          <div class="text-style s-confirm-general-total-val">₹ 1325</div>
+        </div>
+      </div>
+      <div class="confirm-info-detail">
+        <p class="confirm-info-detail-title2 text-style marTopBom">Manage Trip</p>
+        <ul>
+          <li class="confirm-info-detail-item confirm-info-detail-manage">
+            <div class="text-style2 ">Share Trip</div>
+            <i class="s-icon s-icon-datadown"></i>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-manage">
+            <div class="text-style2 ">Print Invoice</div>
+            <i class="s-icon s-icon-datadown"></i>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-manage">
+            <div class="text-style2 ">Print Ticket</div>
+            <i class="s-icon s-icon-datadown"></i>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-manage">
+            <div class="text-style2 ">Change Trip</div>
+            <i class="s-icon s-icon-datadown"></i>
+          </li>
+          <li class="confirm-info-detail-item confirm-info-detail-manage">
+            <div class="text-style2 ">Cancel Trip</div>
+            <i class="s-icon s-icon-datadown"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+// import VerticalToggle from '@/constants/vertical-toggle.js';
+export default {
+  data () {
+    return {
+      showDetailF: false,
+      showDetailT: false
+    }
+  },
+  components: {
+    // VerticalToggle
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .marBot20{
+    margin-bottom: 0.2rem;
+  }
+  .marBot30{
+    margin-bottom: 0.3rem;
+  }
+  .marTopBom{
+    margin-bottom: 0.3rem;
+    margin-top: 0.4rem;
+  }
+  .text-style{
+    font-size: 0.24rem;
+    line-height: 0.3rem;
+  }
+  .text-style2{
+    font-size: 0.28rem;
+    line-height: 0.35rem;
+  }
+  .s-icon{
+    vertical-align: middle;
+  }
+  .s-confirm-general-key{
+    width: 30%;
+    color:rgba(153,153,153,1);
+  }
+  .s-confirm-general-val{
+    width: 70%;
+    color:rgba(17,17,17,1);
+  }
+  .s-confirm-general-val-price{
+    text-align: right;
+    font-size: 0.32rem;
+    line-height: 0.45rem;
+    font-weight: 600;
+  }
+  .space-line{
+    padding-top: 0.45rem;
+    border-top:0.01rem solid rgba(220,220,220,1);
+  }
+  .confirm-info{
+    padding: 0 0.3rem;
+  }
+  .confirm-info-title{
+    color: $lighterBlack;
+  }
+  .info-title{
+    color: $lightBlack
+  }
+  .confirm-info-detail-title{
+    font-size:0.32rem;
+    color:rgba(0,0,0,1);
+    line-height:0.39rem;
+    font-weight: bold;
+  }
+  .confirm-info-detail-title2{
+    color:$lightBlack;
+    font-weight: bold;
+  }
+  .confirm-info-detail-item{
+    display: flex;
+    margin-bottom: 0.1rem;
+  }
+  .confirm-info-detail-item-price{
+    margin-top: 0.38rem;
+  }
+  .confirm-info-refundable{
+    font-size: 0.24rem;
+    color:rgba(227,164,40,1);
+    line-height:0.3rem;
+  }
+  .confirm-info-detail-box{
+    padding-bottom: 0.4rem;
+  }
+  // total
+  .confirm-info-detail-total{
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  .s-confirm-general-total-key{
+    font-size: 0.24rem;
+    line-height: 0.3rem;
+  }
+  .s-confirm-general-total-val{
+    font-size: 0.42rem;
+    line-height: 0.52rem;
+    font-weight: bold;
+    margin-left: 0.2rem;
+  }
+  .green{
+    color: $green;
+  }
+  // manage
+  .confirm-info-detail-manage{
+    padding:0.28rem 0;
+    margin:0;
+    border-bottom:1px solid #d8d8d8;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .s-icon-datadown{
+    cursor: pointer;
+    transform: rotate(-90deg);
+  }
+</style>

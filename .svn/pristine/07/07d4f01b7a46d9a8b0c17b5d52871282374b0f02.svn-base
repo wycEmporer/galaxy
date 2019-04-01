@@ -1,0 +1,12 @@
+export const CHANGE_TYPE = 'CHANGE_TYPE';
+export const SET_CITY = 'SET_CITY';
+export const SET_CITY_TYPE = 'SET_CITY_TYPE';
+export const SET_DATE = 'SET_DATE';
+export const SET_DATE_TYPE = 'SET_DATE_TYPE';
+export const SET_PASSENGER = 'SET_PASSENGER';
+export const OPEN_PASSENGER = 'OPEN_PASSENGER';
+export const CLOSE_PASSENGER = 'CLOSE_PASSENGER';
+export const SET_CLASS = 'SET_CLASS';
+export const SAVE_FLIGHTINFO = 'SAVE_FLIGHTINFO';
+export const EXCHANGE_CITY = 'EXCHANGE_CITY';
+export const CHANGE_FLIGHT_SORT = 'CHANGE_FLIGHT_SORT';

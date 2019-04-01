@@ -1,0 +1,23 @@
+<template>
+  <div class="user_trip">
+    <div>
+      <!-- <TripHeader></TripHeader> -->
+      <!-- <TripList></TripList> -->
+    </div>
+  </div>
+</template>
+<script>
+// import TripInfoPart from '';
+export default {
+  components: {
+    // TripHeader: () => import('./TripHeader'),
+    // TripList: () => import('./TripList')
+  },
+  data () {
+    return {};
+  }
+}
+</script>
+<style lang="scss" scoped>
+
+</style>

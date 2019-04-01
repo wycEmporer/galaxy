@@ -1,0 +1,5 @@
+
+export const searchAirPortCity = '/heg_api/airportCity/searchAirPortCity.do';
+export const getLowPriceCalendar = '/heg_api/flight/getLowPriceCalendar.do';
+// flight_api
+export const getSearchFlightsURLStirng = '/flight_api/flight/SearchFlightsNew.do';

@@ -1,0 +1,102 @@
+<template>
+  <div class="detail_city">
+    <div class="confirm-info-detail">
+      <p class="confirm-info-detail-title2 text-style marBot20 clear">Dubai(DXB) - Mumbai(BOM) <span class="trip-status">{{status}}</span></p>
+      <p class="confirm-info-detail-title text-style marBot30">Flight Info</p>
+      <ul>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Operated by:</div>
+          <div class="text-style s-confirm-general-val"> Cathay Pacific</div>
+        </li>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Flight code:</div>
+          <div class="text-style s-confirm-general-val">{{'KA876'}}</div>
+        </li>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Departure : </div>
+          <div class="text-style s-confirm-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+        </li>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Arrival:</div>
+          <div class="text-style s-confirm-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+        </li>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Flight Duration:</div>
+          <div class="text-style s-confirm-general-val">2h15m, none-stop</div>
+        </li>
+        <li class="confirm-info-detail-item">
+          <div class="text-style s-confirm-general-key">Baggage Policy:</div>
+          <div class="text-style s-confirm-general-val">1 checkin luggage ( &lt; 10kg ), 1 cabin luggage ( &lt; 28 kg )</div>
+        </li>
+      </ul>
+    </div>
+    <p class="confirm-info-refundable">none-refundable</p>
+  </div>
+</template>
+<script>
+export default {
+  computed: {
+    status () {
+      let status = this.$store.state.MyTripList.statusString;
+      return status;
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.marBot30{
+  margin-bottom: 0.3rem;
+}
+.marTopBom{
+  margin-bottom: 0.3rem;
+  margin-top: 0.4rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+}
+.confirm-info-detail-title2{
+  font-size:0.32rem;
+  line-height:0.39rem;
+  color:rgba(0,0,0,1);
+  font-weight: bold;
+}
+.trip-status{
+  float: right;
+  height:0.27rem;
+  color:#333;
+  font-size: 0.24rem;
+}
+.confirm-info-detail-item{
+  display: flex;
+  margin-bottom: 0.1rem;
+}
+.confirm-info-detail-item-price{
+  margin-top: 0.38rem;
+}
+.confirm-info-refundable{
+  font-size: 0.24rem;
+  color:rgba(227,164,40,1);
+  line-height:0.3rem;
+}
+.confirm-info-refundable{
+  font-size: 0.24rem;
+  color:rgba(227,164,40,1);
+  line-height:0.3rem;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+}
+</style>

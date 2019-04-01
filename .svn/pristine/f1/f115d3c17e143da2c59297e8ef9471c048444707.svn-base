@@ -1,0 +1,256 @@
+<template>
+  <div>
+    <div class="search_form">
+      <div class="search_form-ways">
+      <div class="search_form-ways-box">
+        <div class="search_form-way" @click="CHANGE_TYPE(0)">
+          <i class="s-icon" :class="tripType === 0? 's-icon-checked':'s-icon-unchecked'"></i>
+          <span class="search_form-way-text">ONE WAY</span>
+        </div>
+        <div class="search_form-way" @click="CHANGE_TYPE(1)">
+          <i class="s-icon" :class="tripType === 1? 's-icon-checked':'s-icon-unchecked'"></i>
+          <span class="search_form-way-text">ROUND WAY</span>
+        </div>
+      </div>
+      <!-- <div class="">
+        My Trips
+      </div> -->
+      </div>
+      <div class="search_form-cities">
+        <div class="search_form-city" @click="SET_CITY_TYPE(0)">
+          <div class="search_form-city-code">
+            {{selectedCitys[0].iata}}
+          </div>
+          <div class="search_form-city-text">
+            {{selectedCitys[0].airport}}
+          </div>
+        </div>
+        <i class="s-icon s-icon-exchange"></i>
+        <div class="search_form-city" @click="SET_CITY_TYPE(1)">
+          <div class="search_form-city-code">
+            {{selectedCitys[1].iata}}
+          </div>
+          <div class="search_form-city-text">
+            {{selectedCitys[1].airport}}
+          </div>
+        </div>
+      </div>
+      <div class="search_form-calendars">
+        <div class="search_form-calendar" @click="SET_DATE_TYPE(0)">
+          <div class="s-icon-calendar s-icon"></div>
+          <div class="search_form-calendar-text">
+            {{getWDMY(departDate)}}
+          </div>
+        </div>
+        <div class="search_form-calendar" @click="SET_DATE_TYPE(1)" v-if="tripType===1">
+          <i class="s-icon-calendar s-icon"></i>
+          <div class="search_form-calendar-text">
+            {{getWDMY(arriveDate)}}
+          </div>
+        </div>
+      </div>
+      <div class="search_form-passenger" @click="OPEN_PASSENGER">
+        <i class="s-icon-user s-icon"></i>
+        <div class="search_form-passenger-text">
+          {{`${passengers.adult + passengers.child + passengers.infant} Traveller, ${flightClass}`}}
+        </div>
+      </div>
+      <div class="serch_form-search" @click="searchFlight">
+        Search
+      </div>
+      <div class="search_form-tips">
+        <div class="search_form-tip">
+          <i class="s-icon s-icon-nike"></i>
+          <span class="search_form-tip-text">
+            BEST PRICE GUARANTEED
+          </span>
+        </div>
+        <div class="search_form-tip">
+          <i class="s-icon s-icon-nike"></i>
+          <span class="search_form-tip-text">
+            24×7 SUPPORT
+          </span>
+        </div>
+        <div class="search_form-tip">
+          <i class="s-icon s-icon-nike"></i>
+          <span class="search_form-tip-text">
+            Secured Payment
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import EventHub from '@/utils/EventHub';
+import { mapState, mapMutations } from 'vuex';
+import { SET_CITY_TYPE, SET_DATE, SET_DATE_TYPE, SET_PASSENGER, CHANGE_TYPE, OPEN_PASSENGER } from '@/store/type';
+import { getWDMY, getYearMonthDayString } from '@/utils/DateFormatUtils.js';
+
+export default {
+  name: 'SearchForm',
+  components: {
+  },
+  data () {
+    return {
+      getWDMY
+    };
+  },
+  computed: {
+    ...mapState({
+      tripType: (state) => state.SearchForm.tripType,
+      selectedCitys: (state) => state.SearchForm.selectedCitys,
+      // cityType: 0, // 出发地， 目的地
+      // dateType: 0, //  去程 时间，回程时间
+      departDate: (state) => state.SearchForm.departDate,
+      arriveDate: (state) => state.SearchForm.arriveDate,
+      passengers: (state) => state.SearchForm.passengers,
+      flightClass: (state) => state.SearchForm.flightClass
+    })
+  },
+  methods: {
+    ...mapMutations([
+      CHANGE_TYPE,
+      SET_CITY_TYPE,
+      SET_DATE,
+      SET_DATE_TYPE,
+      SET_PASSENGER,
+      OPEN_PASSENGER
+    ]),
+    searchFlight () {
+      const dateString = this.tripType === 0 ? `${getYearMonthDayString(this.departDate)}` : `${getYearMonthDayString(this.departDate)}-${getYearMonthDayString(this.arriveDate)}`;
+
+      const href = `/flights/${this.selectedCitys[0].iata}-${this.selectedCitys[1].iata}/${dateString}?adults=${this.passengers.adult}&child=${this.passengers.child}&infants=${this.passengers.infant}&cabinClass=${this.flightClass}`;
+
+      location.href = href;
+    }
+
+  },
+  created () {
+    EventHub.$on('setAirport', this.setAirport);
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.search_form{
+  background-color: #fff;
+}
+.search_form-ways{
+  display: flex;
+  padding-top: 0.3rem;
+  margin-bottom: 10px;
+}
+.search_form-ways-box{
+  display: flex;
+  padding: 0 .3rem;
+}
+.search_form-way{
+  display: flex;
+  align-items: center;
+  font-size: 0.22rem;
+  & + .search_form-way{
+    margin-left: 0.3rem;
+  }
+}
+.search_form-way-text{
+  margin-left: 0.2rem;
+}
+
+.search_form-cities{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.3rem;
+  margin-bottom: 0.2rem;
+}
+.search_form-city{
+  width: 3rem;
+  height: 1.83rem;
+  padding-top: 0.2rem;
+  text-align: center;
+  background-color: rgba(250,250,250,1);
+  border-radius: 0.12rem;
+  border: 1px solid #dcdcdc;
+}
+.search_form-city-code{
+  font-size: 0.56rem;
+  font-weight: bold;
+  // margin-bottom: ;
+}
+.search_form-city-text{
+  color:$lighterBlack;
+  font-size: 0.22rem;
+  line-height: .33rem;
+}
+
+.search_form-calendars{
+  display: flex;
+  align-items: center;
+  padding: 0 0.3rem;
+  margin-bottom: 0.2rem;
+}
+.search_form-calendar{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(250,250,250,1);
+  height: 0.82rem;
+  padding: 0 0.2rem;
+  border-radius: 0.12rem;
+  & + .search_form-calendar{
+    margin-left: 0.44rem;
+  }
+}
+.search_form-calendar-text{
+  color: $lighterBlack;
+  font-size: 0.24rem;
+  margin-left: 0.2rem;
+}
+.search_form-passenger{
+  display: flex;
+  height: 0.82rem;
+  padding: 0 0.2rem;
+  margin: 0 0.3rem 0.4rem;
+  align-items: center;
+  background-color: rgba(250,250,250,1);
+  border-radius: 0.12rem;
+
+}
+.search_form-passenger-text{
+  color: $lighterBlack;
+  font-size: 0.24rem;
+  margin-left: 0.2rem;
+}
+.serch_form-search{
+  @include flexCenter();
+  height: 0.84rem;
+  width: 6.2rem;
+  font-size: 0.36rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 0.12rem;
+  background-color: $yellow;
+  margin: 0 auto;
+}
+.search_form-tips{
+  width: 6.2rem;
+  display:flex;
+  padding: 0.2rem 0 0.3rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.search_form-tip{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1.6rem;
+  font-size: 0.2rem;
+}
+.search_form-tip-text{
+  width: 1.3rem;
+}
+</style>

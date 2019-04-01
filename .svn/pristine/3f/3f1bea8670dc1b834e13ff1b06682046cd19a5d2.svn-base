@@ -1,0 +1,31 @@
+<template>
+  <div>
+    <paymentInfo></paymentInfo>
+    <paymentMethod></paymentMethod>
+  </div>
+</template>
+
+<script>
+import paymentInfo from './paymentInfo'
+import paymentMethod from './paymentMethod'
+export default {
+  data () {
+    return {
+      
+    };
+  },
+  methods: {
+  
+  },
+  components:{
+    paymentInfo,
+    paymentMethod
+  },
+  created () {
+   
+  }
+};
+</script>
+<style lang="scss" scoped>
+
+</style>

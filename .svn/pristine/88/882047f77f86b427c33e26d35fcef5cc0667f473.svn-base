@@ -1,0 +1,13 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { SearchForm } from './modules/SearchForm';
+import { FlightInfo } from './flight/flightInfo';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  modules: {
+    SearchForm,
+    FlightInfo
+  }
+});

@@ -1,0 +1,42 @@
+<template>
+  <div class="flights_header">
+    <div class="flights_header-left">
+      <h3 class="flights_header-city">{{'Dubai'}} - {{'Mumbai'}}</h3>
+      <p class="flights_header-time">{{'Tue, 20 Nov / Tue, 20 Nov'}}</p>
+    </div>
+    <i class="s-icon s-icon-search"></i>
+  </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flights_header{
+  background: $green;
+  padding:12px 15px;
+  @include flexCenter;
+  justify-content: space-between;
+  .flights_header-city{
+    color: #fff;
+    font-size: 19px;
+    line-height:24px;
+  }
+  .flights_header-time{
+    color: #fff;
+    font-size: 11px;
+    line-height:15px;
+  }
+  .s-icon{
+    color: #fff;
+    width:19px;
+    height:19px;
+    cursor: pointer;
+  }
+}
+</style>

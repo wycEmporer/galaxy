@@ -1,0 +1,61 @@
+<template>
+  <div class="user_trip">
+    <div v-show="!Uncomping.show">
+      <TripHeader></TripHeader>
+      <TripList></TripList>
+    </div>
+    <TripUncomping v-show="Uncomping.show"></TripUncomping>
+    <!-- <TripUnpaid></TripUnpaid>
+    <TripCompleted></TripCompleted>
+    <TripCancelled></TripCancelled> -->
+  </div>
+</template>
+<script>
+import TripHeader from './TripHeader.vue';
+import TripList from './TripList.vue';
+import TripUncomping from './Uncomping.vue';
+// import TripUnpaid from './Unpaid.vue';
+// import TripCompleted from './Completed.vue';
+// import TripCancelled from './Cancelled.vue';
+import { mapState } from 'vuex';
+import { queryUserOrderNew } from '@/constants/ApiConstants.js';
+export default {
+  components: {
+    TripHeader,
+    TripList,
+    TripUncomping,
+    // TripUnpaid,
+    // TripCompleted,
+    // TripCancelled
+  },
+  data () {
+    return {
+      showTripList: true
+    };
+  },
+  created () {
+    this.searchUserOrderList();
+  },
+  computed: {
+    ...mapState({
+      Uncomping: state => state.MyTripList.tripDetail
+    })
+  },
+  methods: {
+    searchUserOrderList () {
+      let data = {
+        pageNum: 1,
+        pageSize: 8,
+        status: 'Upcoming'
+      };
+      this.$store.commit('saveMyTripList', 'Upcoming');
+      this.$http.post(queryUserOrderNew, data).then(res => {
+        // console.log(res);
+      });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+
+</style>

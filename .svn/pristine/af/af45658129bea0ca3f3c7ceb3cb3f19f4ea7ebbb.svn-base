@@ -1,0 +1,21 @@
+
+// heg_pai
+export const searchAirPortCity = '/heg_api/airportCity/searchAirPortCity.do';
+export const getLowPriceCalendar = '/heg_api/flight/getLowPriceCalendar.do';
+export const advList = '/heg_api/advertising/advList.do';
+export const queryUserOrderNew = '/heg_api/queryUserOrderNew.do';
+export const queryUserOrderDetail = '/heg_api/queryOrderDetailByTripIdNew.do';
+export const getRefundReason = '/heg_api/refund/getRefundReason.do';
+export const getRefundOTP = '/heg_api/refund/getRefundOTP.do';
+export const applyForRefundTogether = '/heg_api/refund/applyForRefundTogether.do';
+export const applyForRebookTogether = '/heg_api/rebook/applyForRebookTogether.do';
+export const getAdvertising = '/heg_api/advertising/advList.do';
+export const cancelOrderByGuest = '/heg_api/cancelOrder/cancelOrderByGuest.do';
+// payment page
+export const queryOrderDetail = '/heg_api/order/queryOrderDetail.do';
+export const queryPaymentChannel = '/heg_api/queryPaymentChannel.do';
+export const paymentH = '/heg_api/paymentH.do';
+// flight_api
+export const searchHistory = '/flight_api/flight/SearchFlightsHistory.do';
+export const getSearchFlightsURLStirng = '/flight_api/flight/SearchFlightsByChannel.do';
+export const getOffers = '/heg_api/advertising/advList.do?type=13&device=0';

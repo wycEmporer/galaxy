@@ -1,0 +1,18 @@
+$fontFamily: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$black: #222;
+$lightBlack: #666;
+$lighterBlack: #999;
+
+$gray: #ccc;
+$lightGray: #ddd;
+
+$yellow: #E3A428;
+$green: #017959;
+
+@mixin flexCenter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

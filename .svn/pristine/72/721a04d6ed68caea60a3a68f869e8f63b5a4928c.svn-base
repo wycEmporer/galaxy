@@ -1,0 +1,59 @@
+<template>
+  <div class="trip_list">
+    <template v-for="(item, index) in triplist">
+      <div class="list_child" :key="index">
+        <TripInfoPart :flightInfo="item" ></TripInfoPart>
+        <div >
+          <button class="list_btn">Pay Now</button>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+<script>
+export default {
+  components: {
+    TripInfoPart: () => import('@/components/TripInfoPart')
+  },
+  data () {
+    return {
+      triplist: [
+        { id: 0, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 1, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 2, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 3, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 4, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 5, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 6, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        { id: 7, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') }
+      ]
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+// .user_trip{}
+.trip_list{
+  background: rgb(241,241,241);
+  overflow: hidden;
+  padding:0.3rem;
+}
+.list_child{
+  @include flexCenter;
+  justify-content: space-between;
+  background: #fff;
+  padding:0.2rem 0.3rem;
+  margin-bottom: 0.2rem;
+  border-radius:0.12rem;
+  box-shadow:0rem 0.02rem 0.06rem 0rem rgba(174,174,174,0.5);
+}
+.list_btn{
+  width:1.57rem;
+  height:0.44rem;
+  line-height: 0.44rem;
+  color:#fff;
+  background:rgba(227,164,40,1);
+  border-radius:0.04rem;
+  font-weight: bold;
+}
+</style>

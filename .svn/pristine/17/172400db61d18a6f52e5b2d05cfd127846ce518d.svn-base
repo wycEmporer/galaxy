@@ -1,0 +1,89 @@
+
+<template>
+  <div>
+    <div class="flight-details">
+      <p class="flight-details-title">Finish booking</p>
+      <div class="flight-details-info">
+        <div class="flight-details-trip">
+          <span class="flight-details-trip-place">Dubai(DXB) - Mumbai(BOM)</span>
+          <span class="flight-details-trip-type general-css">Round trip</span>
+        </div>
+        <div class="flight-details-date general-css">Tue, 20 Nov, 2019 - Tue, 20 Nov, 2019</div>
+        <div class="flight-details-travel">
+          <span class="flight-details-travel-num general-css">2 Adults, Economy</span>
+          <span class="flight-details-travel-details" @click="showDetail = !showDetail">flight detail&nbsp; <i class="s-icon" :class="showDetail ? 's-icon-up' : 's-icon-down' "></i></span>
+        </div>
+         <vertical-toggle>
+          <div class="flight-details-show" v-show="showDetail">
+            <TripInfo></TripInfo>
+          </div>
+        </vertical-toggle>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+ /* eslint-disable */ 
+import VerticalToggle from '@/constants/vertical-toggle.js';
+import TripInfo from './TripInfo';
+export default {
+  data (){
+    return {
+      showDetail : false
+    }
+  },
+  components:{
+    VerticalToggle,
+    TripInfo
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+ // eslint-disable
+  .general-css{
+    font-size: 12px;
+    color: $lightBlack;
+  }
+  .flight-details{
+    padding:0 15px;
+  }
+  .flight-details-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: $lightBlack;
+    font-weight: 700;
+  }
+  .flight-details-info{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DCDCDC;
+  }
+  .flight-details-trip,
+  .flight-details-travel{
+    display: flex;
+    line-height: 30px;
+  }
+  .flight-details-trip-place{
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    width: 80%;
+  }
+  .flight-details-trip-type{
+    text-align: right;
+    width: 20%;
+  }
+  .flight-details-date{
+    line-height: 30px;
+  }
+  .flight-details-travel-num{
+    width: 60%;
+  }
+  .flight-details-travel-details{
+    text-align: right;
+    width: 40%;
+    font-size: 12px;
+    color: $green;
+  }
+</style>

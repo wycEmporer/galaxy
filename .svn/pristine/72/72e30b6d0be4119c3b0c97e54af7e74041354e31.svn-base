@@ -1,0 +1,105 @@
+<template>
+  <div >
+    <div class="trip-info">
+      <p class="trip-info-title">Going</p>
+      <div class="trip-info-detail">
+        <p class="trip-info-detail-title">Dubai(DXB) - Mumbai(BOM)</p>
+        <ul>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Operated by:</div>
+            <div class="s-trip-general s-trip-general-val"> Cathay Pacific</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Departure : </div>
+            <div class="s-trip-general s-trip-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Arrival:</div>
+            <div class="s-trip-general s-trip-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Flight Duration:</div>
+            <div class="s-trip-general s-trip-general-val">2h15m, none-stop</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Baggage policy: </div>
+            <div class="s-trip-general s-trip-general-val">1 checkin baggage(&lt;25kg), 1 Cabin Baggage(&lt;7kg)</div>
+          </li>
+        </ul>
+      </div>
+      <p class="trip-info-refundable">none-refundable</p>
+    </div>
+    <div class="trip-info">
+      <p class="trip-info-title">Returning</p>
+      <div class="trip-info-detail">
+        <p class="trip-info-detail-title">Dubai(DXB) - Mumbai(BOM)</p>
+        <ul>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Operated by:</div>
+            <div class="s-trip-general s-trip-general-val"> Cathay Pacific</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Departure : </div>
+            <div class="s-trip-general s-trip-general-val">06:40 Tue, May 20, 2019 Dubai International Airport(DXB)</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Arrival:</div>
+            <div class="s-trip-general s-trip-general-val">08:55 Tue, May 20, 2019 Blablabla International Airport (BOM)</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Flight Duration:</div>
+            <div class="s-trip-general s-trip-general-val">2h15m, none-stop</div>
+          </li>
+          <li class="trip-info-detail-item">
+            <div class="s-trip-general s-trip-general-key">Baggage policy: </div>
+            <div class="s-trip-general s-trip-general-val">1 checkin baggage(&lt;25kg), 1 Cabin Baggage(&lt;7kg)</div>
+          </li>
+        </ul>
+      </div>
+      <p class="trip-info-refundable">none-refundable</p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss" scoped>
+  .s-trip-general{
+    line-height:0.36rem;
+    font-size:0.24rem;
+  }
+  .s-trip-general-key{
+    width: 30%;
+    color:rgba(153,153,153,1);
+  }
+  .s-trip-general-val{
+    width: 70%;
+    color:rgba(17,17,17,1);
+  }
+  .trip-info-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 700;
+  }
+  .trip-info-detail-title{
+    font-size:0.32rem;
+    color:rgba(0,0,0,1);
+    line-height:0.39rem;
+    margin-bottom: 0.21rem;
+  }
+  .trip-info-detail-item{
+    display: flex;
+    margin-bottom: 0.1rem;
+  }
+  .trip-info-refundable{
+    font-size: 0.24rem;
+    color:rgba(227,164,40,1);
+    line-height:0.3rem;
+    margin-bottom: 0.1rem;
+  }
+</style>

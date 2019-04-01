@@ -1,0 +1,43 @@
+<template>
+  <div class="confirm-info">
+    <p class="confirm-info-title marBot20">Trip ID : <span class="info-title">987654321987654321</span></p>
+    <div class="confirm-info-detail-box">
+      <TripDetailCity></TripDetailCity>
+      <TripDetailTraveller></TripDetailTraveller>
+      <TripDetailContact></TripDetailContact>
+      <TripDetailPrice></TripDetailPrice>
+      <TripDetailManage></TripDetailManage>
+    </div>
+  </div>
+</template>
+<script>
+import TripDetailCity from './TripDetailCity';
+import TripDetailTraveller from './TripDetailTraveller';
+import TripDetailContact from './TripDetailContact';
+import TripDetailPrice from './TripDetailPrice';
+import TripDetailManage from './TripDetailManage';
+export default {
+  components: {
+    TripDetailCity,
+    TripDetailTraveller,
+    TripDetailContact,
+    TripDetailPrice,
+    TripDetailManage
+  }
+};
+</script>
+<style lang="scss" scoped>
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.confirm-info{
+  padding: 0 0.3rem;
+}
+.confirm-info-title{
+  font-size: 0.24rem;
+  color: $lighterBlack;
+}
+.info-title{
+  color: $lightBlack;
+}
+</style>

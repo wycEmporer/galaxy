@@ -1,0 +1,2 @@
+
+export const searchAirPortCity = '/heg_api/airportCity/searchAirPortCity.do';

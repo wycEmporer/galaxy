@@ -1,0 +1,50 @@
+<template>
+  <div class="trip_detail">
+    <TripUncomping v-show="showUncomping" />
+    <TripUnpaid v-show="showUnpaid" />
+    <TripCompleted v-show="showCompleted" />
+    <TripCancelled v-show="showCancelled" />
+  </div>
+</template>
+<script>
+import TripUncomping from './StatusUncomping.vue';
+import TripUnpaid from './StatusUnpaid.vue';
+import TripCompleted from './StatusCompleted.vue';
+import TripCancelled from './StatusCancelled.vue';
+import { mapMutations } from 'vuex';
+export default {
+  components: {
+    TripUncomping,
+    TripUnpaid,
+    TripCompleted,
+    TripCancelled
+  },
+  data () {
+    return {
+      showUncomping: false,
+      showUnpaid: false,
+      showCompleted: false,
+      showCancelled: false
+    }
+  },
+  created () {
+    let orderId = this.$route.query.id;
+    this.saveSearchDetailInfo(orderId);
+    let status = this.$store.state.MyTripList.status;
+    if (status === 1) {
+      this.showUncomping = true;
+    } else if (status === 2) {
+      this.showUnpaid = true;
+    } else if (status === 3) {
+      this.showCompleted = true;
+    } else if (status === 4) {
+      this.showCancelled = true;
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'saveSearchDetailInfo'
+    ])
+  }
+}
+</script>

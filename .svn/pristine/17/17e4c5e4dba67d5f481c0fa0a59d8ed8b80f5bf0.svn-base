@@ -1,0 +1,47 @@
+<template>
+  <div class="confirm-info">
+    <div class="confirm-info-detail-box">
+      <template v-for="(item, key) in trip.triplist">
+        <TripDetailCity :tripCity="item" :key="key"/>
+        <template v-for="info in item.travellerinfo" >
+          <TripDetailTraveller :tripTraveller="info" :key="info.name+'-'+key"/>
+        </template>
+      </template>
+      <TripDetailContact :tripContact="tripInfo" />
+      <TripDetailPrice :tripPrice="tripManage" :tripList="trip" />
+      <TripDetailManage :tripManage="tripManage" />
+    </div>
+  </div>
+</template>
+<script>
+import TripDetailCity from './TripDetailCity';
+import TripDetailTraveller from './TripDetailTraveller';
+import TripDetailContact from './TripDetailContact';
+import TripDetailPrice from './TripDetailPrice';
+import TripDetailManage from './TripDetailManage';
+import { mapState } from 'vuex';
+export default {
+  components: {
+    TripDetailCity,
+    TripDetailTraveller,
+    TripDetailContact,
+    TripDetailPrice,
+    TripDetailManage
+  },
+  computed: {
+    ...mapState({
+      trip: state => state.MyTripList.tripDetailInfo,
+      tripInfo: state => state.MyTripList.singleTripInfo,
+      tripManage: state => state.MyTripList.tripDetailInfo.order
+    })
+  }
+};
+</script>
+<style lang="scss" scoped>
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.confirm-info{
+  padding: 0 0.3rem;
+}
+</style>

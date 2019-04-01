@@ -1,0 +1,97 @@
+<template>
+  <div>
+    <div class="flights_sort">
+      <div class="flights_filter">
+        <h3 class="flights_filter-select">{{sortTitle}}</h3>
+        <p class="flights_filter-text" @click="showFilterModel">Filter <i class="flights_filter-icon s-icon s-icon-filter"></i></p>
+      </div>
+      <ul class="flights_sort_type">
+        <li class="sort_type-li" v-for="item in sortType" :key="item.id" @click="changeSortType(item.id)">
+          <span class="sort_type-child" :class="{'sort_type-child-active': item.flag}">{{item.name}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: ['sortTitle'],
+  data () {
+    return {
+      sortType: [
+        { id: 0, name: 'Best Price', flag: true },
+        { id: 1, name: 'Shortest Time', flag: false },
+        { id: 2, name: 'Departure Time', flag: false }
+      ]
+    };
+  },
+  methods: {
+    showFilterModel () {
+      this.$emit('FilterModel');
+    },
+    changeSortType (id) {
+      this.sortType.forEach((e, i) => {
+        if (id === i) {
+          e.flag = true;
+        } else {
+          e.flag = false;
+        }
+      });
+      this.$emit('sortFlightList', id);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flights_sort{
+  padding:0.3rem 0.3rem 0;
+}
+.flights_filter{
+  @include flexCenter;
+  justify-content: space-between;
+}
+.flights_filter-select{
+  font-size: 0.28rem;
+  color: $lightBlack;
+  font-weight:bold;
+  line-height: 0.36rem;
+  cursor: pointer;
+}
+.flights_filter-text{
+  color: $green;
+  font-size: 0.24rem;
+  cursor: pointer;
+}
+.flights_filter-icon{
+  margin-left:0.05rem;
+  vertical-align: middle;
+}
+// sort
+.flights_sort_type{
+  @extend .flights_filter ;
+  margin-top: 0.4rem;
+}
+.sort_type-li{
+  flex:1;
+}
+.sort_type-li:nth-of-type(2){
+  flex:1;
+  text-align: center;
+}
+.sort_type-li:last-child{
+  flex:1;
+  text-align: right;
+}
+.sort_type-child{
+  display: inline-block;
+  border:0;
+  font-size: 0.24rem;
+  color:$lightBlack;
+  line-height: 0.3rem;
+  padding-bottom: 0.18rem;
+}
+.sort_type-child-active{
+  color:$green;
+  border-bottom:2px solid $green;
+}
+</style>

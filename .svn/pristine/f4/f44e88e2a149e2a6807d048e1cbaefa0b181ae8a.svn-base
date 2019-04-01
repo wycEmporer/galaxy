@@ -1,0 +1,70 @@
+<template>
+  <div class="detail_traveller">
+    <p class="confirm-info-detail-title text-style marBot20">Traveler Info</p>
+    <p class="confirm-info-detail-title2 marBot30">Mr. Cheng, Fei Fan </p>
+    <ul>
+      <li class="confirm-info-detail-item">
+        <div class="text-style s-confirm-general-key">First Name:</div>
+        <div class="text-style s-confirm-general-val">Fei-Fan</div>
+      </li>
+      <li class="confirm-info-detail-item">
+        <div class="text-style s-confirm-general-key">Last Name:</div>
+        <div class="text-style s-confirm-general-val">Cheng</div>
+      </li>
+      <li class="confirm-info-detail-item">
+        <div class="text-style s-confirm-general-key">Date of Birth:</div>
+        <div class="text-style s-confirm-general-val">Mar 3,1994</div>
+      </li>
+      <li class="confirm-info-detail-item">
+        <div class="text-style s-confirm-general-key">Nationality:</div>
+        <div class="text-style s-confirm-general-val">India</div>
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+
+  }
+}
+</script>
+<style lang="scss" scoped>
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.marBot30{
+  margin-bottom: 0.3rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.detail_traveller{
+  margin-top: 0.4rem;
+}
+.confirm-info-detail-title{
+    color:$lightBlack;
+    font-weight: bold;
+}
+.confirm-info-detail-title2{
+  color:$lightBlack;
+  font-weight: bold;
+  font-size: 0.32rem;
+  color: black;
+  line-height: 0.39rem;
+}
+.confirm-info-detail-item{
+  margin-bottom: 0.1rem;
+  display: flex;
+  align-items: center;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+}
+</style>

@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <div v-show="true">
+      <FlightsHeader />
+      <FlightsSort @sortFlightList="sortFlightList" />
+      <FlightsFilter />
+      <FlightsList :flightlist="flightlist" />
+    </div>
+    <div></div>
+  </div>
+</template>
+<script>
+import FlightsHeader from './FlightsHeader.vue';
+import FlightsSort from './FlightsSort.vue';
+import FlightsFilter from './FlightsFilter.vue';
+import FlightsList from './FlightsList.vue';
+
+export default {
+  name: 'flights',
+  components: {
+    FlightsHeader,
+    FlightsSort,
+    FlightsFilter,
+    FlightsList
+  },
+  data () {
+    return {
+      flightlist: []
+    };
+  },
+  created () {
+    this.getSearchFlightsList();
+  },
+  methods: {
+    sortFlightList () {
+      console.log('sort');
+    },
+    getSearchFlightsList () {
+      this.flightlist = [
+        { name: 'Air India', Dcode: 'DXB', Rcode: 'BOM', dT: '12:00', RT: '01:00', price: '4860', save: '1325', stop: '0', img: require('../images/IX.png') },
+        { name: 'Air India', Dcode: 'DXB', Rcode: 'BOM', dT: '12:00', RT: '01:00', price: '4860', save: '1325', stop: '0', img: require('../images/IX.png') },
+        { name: 'Air India', Dcode: 'DXB', Rcode: 'BOM', dT: '12:00', RT: '01:00', price: '4860', save: '1325', stop: '0', img: require('../images/IX.png') }
+      ];
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+
+</style>

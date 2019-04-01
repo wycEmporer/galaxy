@@ -1,0 +1,242 @@
+<template>
+  <div class="change-trip-warp" v-if="tripTraveller.length > 0">
+    <p>
+      <span class="change-trip-title lighterBlack">Trip ID :</span>
+      <span class="change-trip-title lightBlack"> {{tripId}}</span>
+    </p>
+    <div class="change-trip-select">
+      <p class="change-trip-select-titel lightBlack">Select Traveler</p>
+      <div v-for="(item, index) in tripTraveller" :key="index">
+        <div class="change-trip-select-travele" v-if="totalPeople.length >= 1" >
+          <input type="checkbox" v-model="totalPeople[index]['checked']" :id="'change-checkbox'+index" class="hide">
+          <label :for="'change-checkbox'+index"  class="select_user lightBlack">
+            <i class="s-icon" :class="totalPeople[index]['checked'] ? 's-icon-select' : 's-icon-unselect'"></i>
+            {{`${item.ptype}.`}}{{item.name | passenger}}
+          </label>
+        </div>
+        <div class="change-trip-select-travele-changing" v-if="true">
+          <p class="change-trip-select-travele-name lightBlack">{{`${item.ptype}.`}}{{item.name | passenger}}</p>
+          <p class="change-trip-select-travele-status lighterBlack">Changing</p>
+        </div>
+      </div>
+    </div>
+    <div class="change-trip-details ">
+      <p class="change-trip-details-title lightBlack">Change detail</p>
+      <form>
+        <div class="change-trip-details-box">
+          <label for="changeDate" class="lightBlack">Change to depart date:</label>
+          <div class="change-trip-details-date">
+            {{departDate}}
+            <input type="date" name="changeDate" class="change-trip-details-date-input" v-model="departDate">
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+          <label for="" class="lightBlack">Change to flight:</label>
+          <input type="text" name="flightNumber" class="change-trip-details-name" v-model="flightNumber">
+          <label for="" class="change-trip-details-otherneed lightBlack">Comments and other needs</label>
+          <textarea class="change-trip-details-comment" v-model="comments"></textarea>
+          <button class="btn change-trip-details-btn" @click.prevent="submitChangeInfo">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<script>
+import { mapState } from 'vuex';
+import { Toast } from 'mint-ui';
+import { applyForRebookTogether } from '@/constants/ApiConstants';
+export default {
+  props: ['tripId'],
+  data () {
+    return {
+      totalPeople: [],
+      comments: '',
+      departDate: '',
+      flightNumber: '',
+      selectChangePeople: []
+    };
+  },
+  computed: {
+    ...mapState({
+      departOrReturn: state => state.MyTripList.departOrReturn,
+      tripTraveller: state => state.MyTripList.tripDetailInfoChange
+    })
+  },
+  filters: {
+    passenger (val) { // Spell the complete passenger's name
+      let name;
+      if (val.indexOf('/') > 0) {
+        name = val.split('/');
+        return name[1] + ',' + name[0];
+      }
+    }
+  },
+  watch: {
+    tripTraveller (val) {
+      if (val) {
+        this.totalPeople = val.map(item => ({
+          checked: true,
+          name: item.name,
+          id: item.travellerId
+        }));
+      }
+    }
+  },
+  methods: {
+    checkChangeData () {
+      this.selectChangePeople = [];
+      this.totalPeople.forEach((e, i) => {
+        let obj = {};
+        if (e.checked) {
+          obj['pId'] = e.id;
+          this.selectChangePeople.push(obj);
+        }
+      });
+      if (this.selectChangePeople.length === 0) {
+        Toast('Please select a passenger to change flight');
+        return false;
+      }
+      if (!this.departDate) {
+        Toast('Please select a departDate to change flight');
+        return false;
+      }
+      if (!this.flightNumber) {
+        Toast('Please enter a flightNumber to change flight');
+        return false;
+      }
+      return true;
+    },
+    submitChangeInfo () {
+      if (!this.checkChangeData()) return false;
+      let data = {
+        flights: [
+          { tripType: this.departOrReturn, departDate: this.departDate, fno: this.flightNumber }
+        ],
+        travellers: this.selectChangePeople
+      };
+      this.$http.post(applyForRebookTogether, data).then(res => {
+        if (res.code === 200 && res.succ) {
+
+        } else {
+          Toast(res.msg);
+        }
+      })
+    }
+  },
+  created () {
+    this.$store.commit('saveSearchDetailInfo', this.tripId);
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .lightBlack{
+   color: $lightBlack;
+  }
+  .lighterBlack{
+    color: $lighterBlack;
+  }
+  .s-icon{
+    vertical-align: middle;
+    margin-right: 0.2rem;
+  }
+  .change-trip-warp{
+    padding: 0rem 0.3rem;
+    font-size: 0.24rem;
+  }
+  .change-trip-select{
+    margin-top: 0.3rem;
+  }
+  .change-trip-details-title,
+  .change-trip-select-titel{
+    font-weight: 700;
+  }
+  .change-trip-select-travele{
+    height:0.3rem;
+    line-height: 0.3rem;
+    margin: 0.2rem 0;
+  }
+  .select_user{
+    display:inline-block;
+    line-height: 0.3rem;
+  }
+  .change-trip-select-travele-changing{
+    display: flex;
+  }
+  .change-trip-select-travele-name{
+    width: 80%;
+  }
+  .change-trip-select-travele-status{
+    width: 20%;
+    text-align: right;
+  }
+  .change-trip-details{
+    padding: 0.3rem 0;
+  }
+  .change-trip-details-date{
+    width:100%;
+    height:0.82rem;
+    line-height: 0.65rem;
+    margin: 0.2rem 0;
+    position: relative;
+    padding: 4px 10px;
+    border-radius:0.12rem;
+    background:rgba(234,234,234,1);
+  }
+  .change-trip-details-date .s-icon{
+    position: absolute;
+    right: 0.2rem;
+    top: 0.36rem;
+    z-index: 4;
+  }
+  .change-trip-details-date-input{
+    width: 95%;
+    height: 100%;
+    margin-right: 5%;
+    border:0.01rem solid rgba(220,220,220,1);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  .change-trip-details-box{
+    margin-top: 0.3rem;
+  }
+  .change-trip-details-name{
+    width: 100%;
+    height:0.82rem;
+    background:rgba(250,250,250,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    margin: 0.2rem 0;
+    padding: 0.1rem 0.2rem;
+    &:focus{
+      border:0.01rem solid $green;
+    }
+  }
+  .change-trip-details-comment{
+    width: 100%;
+    min-height:3.6rem;
+    background:rgba(250,250,250,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    padding: 0.2rem;
+    margin: 0.2rem 0 0.4rem;
+    &:focus{
+      border:0.01rem solid $green;
+    }
+  }
+  .change-trip-details-otherneed{
+    font-weight: 700;
+  }
+  .change-trip-details-btn{
+    width: 100%;
+    height:0.84rem;
+    background:rgba(227,164,40,1);
+    border-radius:0.12rem;
+    font-size:0.36rem;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    line-height:0.84rem;
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,42 @@
+import fetch from '@/utils/ApiUtils';
+import { queryUserOrderNew, queryUserOrderDetail } from '@/constants/ApiConstants';
+export const MyTripList = {
+  state: {
+    status: 1,
+    statusString: 'Uncomping',
+    triplistArray: [],
+    tripDetailInfo: {},
+    statusList: ['', 'Uncomping', 'Unpaid', 'compeleted', 'Cancelled']
+  },
+  actions: {
+    selectDiffStatus ({ commit, state }, type) {
+      state.triplistArray = [];
+      state.status = type;
+      state.statusString = state.statusList[type];
+      commit('saveMyTripList', type);
+    }
+  },
+  mutations: {
+    saveMyTripList (state, type) {
+      let data = {
+        pageNum: 1,
+        pageSize: 8,
+        status: state.statusString
+      };
+      fetch.post(queryUserOrderNew, data).then(res => {
+        let arr = [
+          { id: 5, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN', stop: 1, img: require('@/pages/flights/images/IX.png') },
+        ];
+        state.triplistArray.push(...arr);
+        // console.log(res);
+      })
+    },
+    saveSearchDetailInfo (state, data) {
+      let url = `${queryUserOrderDetail}?tripId=${data}`
+      fetch(url).then(res => {
+        state.tripDetailInfo = res;
+        console.log(`%c ${res.code} --> ${res.message}`, 'color:red;');
+      })
+    }
+  }
+};

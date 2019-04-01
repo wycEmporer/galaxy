@@ -1,0 +1,20 @@
+<template>
+  <div class="tabbar_template">
+    <ul class="">
+      
+    </ul>
+  </div>
+</template>
+<script>
+// import TripInfoPart from '';
+export default {
+  props: {
+
+  }
+}
+</script>
+<style lang="scss" scoped>
+.tabbar_template{
+  color:$green;
+}
+</style>

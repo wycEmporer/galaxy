@@ -1,0 +1,150 @@
+<template>
+  <div class="flights">
+    <SearchCity v-if="showCityLayer"/>
+    <Calendar v-if="showCalendarLayer" />
+    <SearchPassenger v-if="showPassengerLayer" />
+    <div v-show="showFlightList">
+       <SearchForm v-if="showSearchModel" @closeSearchModel="closeSearchModel" @searchFlight="getSearchFlightsList"/>
+      <FlightsHeader v-else @searchModel="searchModel" />
+      <FlightsSort :sortTitle="sortTitle" @sortFlightList="sortFlightList" @filterModel="filterModel" />
+      <FlightsList :advImagelist="advImagelist" @selectReturnFlight="selectReturnFlight" />
+    </div>
+    <FlightsFilter v-if="showFilterModel" @closeFilterModel="closeFilterModel" />
+
+  </div>
+</template>
+<script>
+import FlightsHeader from './FlightsHeader.vue';
+import FlightsSort from './FlightsSort.vue';
+import FlightsList from './FlightsList.vue';
+import FlightsFilter from './FlightsFilter.vue';
+import { getSearchFlightsURLStirng } from '@/constants/ApiConstants';
+import { Toast, Indicator } from 'mint-ui';
+import { getYearMonthDayString } from '@/utils/DateFormatUtils';
+import {
+  SAVE_FLIGHTINFO,
+  // SET_CITY,
+  // SET_DATE,
+  // SET_PASSENGER,
+  // SET_CLASS,
+} from '@/store/type';
+import { mapState } from 'vuex';
+
+export default {
+  name: 'flights',
+  components: {
+    FlightsHeader,
+    FlightsSort,
+    FlightsList,
+    SearchForm: () => import('./SearchForm'),
+    FlightsFilter,
+    SearchCity: () => import('@/components/SearchCity'),
+    Calendar: () => import('@/components/Calendar'),
+    SearchPassenger: () => import('@/components/SearchPassenger')
+  },
+  data () {
+    return {
+      sortTitle: 'Select flight',
+      advImagelist: [],
+      showDiffFlight: 1,
+      showFlightList: true,
+      showSearchModel: false,
+      showFilterModel: false
+    };
+  },
+  computed: {
+    ...mapState({
+      tripType: (state) => state.SearchForm.tripType,
+      selectedCitys: (state) => state.SearchForm.selectedCitys,
+      // cityType: 0, // 出发地， 目的地
+      // dateType: 0, //  去程 时间，回程时间
+      departDate: (state) => state.SearchForm.departDate,
+      arriveDate: (state) => state.SearchForm.arriveDate,
+      passengers: (state) => state.SearchForm.passengers,
+      flightClass: (state) => state.SearchForm.flightClass,
+      showCityLayer: (state) => state.SearchForm.showCityLayer,
+      showCalendarLayer: (state) => state.SearchForm.showCalendarLayer,
+      showPassengerLayer: (state) => state.SearchForm.showPassengerLayer
+    })
+  },
+  created () {
+    this.getSearchFlightsList();
+  },
+  methods: {
+    closeSearchModel () {
+      this.showSearchModel = false;
+    },
+    searchModel () {
+      this.showSearchModel = true;
+    },
+    closeFilterModel (data) {
+      this.showFlightList = true;
+      this.showFilterModel = false;
+      if (data) {
+        console.log(data);
+      }
+    },
+    selectReturnFlight () {
+      this.sortTitle = 'Select Returnning flight';
+    },
+    filterModel () {
+      this.showFilterModel = true;
+      this.showFlightList = false;
+    },
+    sortFlightList (type) {
+      switch (type) {
+        case 0: this.showDiffFlight = 1;
+          this.sortTitle = 'Select flight';
+          // this.$store.commit(CHANGE_TYPE, 0);
+          break;
+        case 1: this.showDiffFlight = 2;
+          this.sortTitle = 'Select Going flight';
+          // this.$store.commit(CHANGE_TYPE, 1);
+          break;
+        case 2: this.showDiffFlight = 3;
+          this.sortTitle = 'Select flight';
+          // this.$store.commit(CHANGE_TYPE, 1);
+          break;
+        default:
+          break;
+      }
+    },
+    getSearchFlightsList () {
+      Indicator.open({
+        spinnerType: 'fading-circle',
+        text: 'Searching for lowest price flight.'
+      });
+      this.advImagelist = [
+        require('../images/1.png'),
+        require('../images/2.png'),
+        require('../images/3.png'),
+        require('../images/1.png')
+      ];
+      // let tripType = this.$store.state.FlightInfo.tripType;
+      let url = `${getSearchFlightsURLStirng}?from=${this.selectedCitys[0].iata}&to=${this.selectedCitys[1].iata}&adults=${this.passengers.adult}&childs=${this.passengers.child}&baby=${this.passengers.infant}&cabinClass=${this.flightClass}&tripType=${this.tripType}&departDate=${getYearMonthDayString(this.departDate)}&returnDate=${getYearMonthDayString(this.arriveDate)}&airline=&carrier=`;
+
+      this.$http(url).then(res => {
+        Indicator.close();
+        if (res.success) {
+          this.$store.commit(SAVE_FLIGHTINFO, res);
+        } else {
+          Toast(res.msg);
+        }
+      }).catch(err => {
+        Indicator.close();
+        Toast(err);
+      });
+    },
+  }
+  // beforeRouteEnter (to, from, next) {
+  //   next(vm => {
+  //     vm.setFromCity()
+  //   });
+  // }
+};
+</script>
+<style lang="scss" scoped>
+.flights{
+  position: relative;
+}
+</style>

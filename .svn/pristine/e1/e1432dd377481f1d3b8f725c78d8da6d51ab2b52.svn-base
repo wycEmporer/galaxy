@@ -1,0 +1,186 @@
+<template>
+  <div class="payment-status-wrap">
+    <div class="payment-status-success">
+      <p class="payment-status-success-title">Thanks For Booking </p>
+      <p class="payment-status-tips">We have received your order. Flight details will be mailed to your email address within minutes.</p>
+    </div>
+    <div class="payment-status-fail hide">
+      <p class="payment-status-fail-title">Thanks For Booking </p>
+      <p class="payment-status-tips">Dear customer, your payment for order:987654321456987654 has failed. </p>
+      <p class="payment-status-tips">Please check the bank account information and your network connection.</p>
+      <p class="payment-status-tips">You can still purchase your flight within 30 minutes without any price change. Click <a href="" class="a_link">here</a> or go to <a href="" class="a_link">My Trip</a> to finish your payment.</p>
+    </div>
+    <div class="payment-status-info">
+      <p class="payment-status-info-title">Order Detail</p>
+      <div class="payment-status-detail-info">
+        <p class="payment-status-detail-info-item">
+          <span>Order ID: </span>
+          <span>21654982313</span>
+        </p>
+        <p class="payment-status-detail-info-item">
+          <span>Contact name: </span>
+          <span>Ian Zheng</span>
+        </p>
+        <p class="payment-status-detail-info-item">
+          <span>Mobile number: </span>
+          <span>+86 15612273475</span>
+        </p>
+        <p class="payment-status-detail-info-item">
+          <span>E-mail address: </span>
+          <span>iancheng0323@gmail.com</span>
+        </p>
+      </div>
+      <p class="payment-status-detail-more" @click="isShowDetail = !isShowDetail">view flight detail
+        <i class="s-icon" :class="isShowDetail? 's-icon-up' : 's-icon-down'"></i>
+      </p>
+      <vertical-toggle>
+        <div v-show="isShowDetail">
+          <div class="payment-status-detail-more-info">
+            <p class="payment-status-detail-info-item">
+              <span>Date:</span>
+              <span>2018/04/01(Mon) - 2018/04/03(BOM), round trip</span>
+            </p>
+            <p class="payment-status-detail-info-item">
+              <span>From: </span>
+              <span>Dubai(DXB)</span>
+            </p>
+            <p class="payment-status-detail-info-item">
+              <span>To: </span>
+              <span>Taipei(TPE)</span>
+            </p>
+            <p class="payment-status-detail-info-item">
+              <span>Traveler: </span>
+              <span>2 Adults</span>
+            </p>
+            <p class="payment-status-detail-info-item">
+              <span>Cabin Class: </span>
+              <span>Economy</span>
+            </p>
+          </div>
+        </div>
+      </vertical-toggle>
+    </div>
+    <div class="payment-status-info-support">
+      <p class="payment-status-detail-info-item">24/7 Support</p>
+      <p class="payment-status-detail-info-item">
+        <span>Tel: </span>
+        <span>0124-607-9960/ 1860-313-9999</span>
+      </p>
+      <p class="payment-status-detail-info-item">
+        <span>Email:</span>
+        <span>cs@happpeasygo.com</span>
+      </p>
+    </div>
+    <div class="payment-status-detail-info-srcad">
+      <img src="" alt="" class="">
+    </div>
+    <div class="text-align">
+      <a href="/" class="payment-status-go-home">Back to Home</a>
+    </div>
+  </div>
+</template>
+<script>
+import VerticalToggle from '@/utils/vertical-toggle.js';
+export default {
+  name: 'Home',
+  components: {
+    VerticalToggle
+  },
+  data () {
+    return {
+      isShowDetail: false
+    };
+  },
+  computed: {
+
+  },
+  methods: {
+
+  },
+  created () {
+
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .text-align{
+    text-align: center;
+  }
+  .a_link{
+    color: $green;
+    text-decoration: underline;
+  }
+  .payment-status-success,
+  .payment-status-fail{
+    padding: 0.1rem  0.3rem;
+  }
+
+  .payment-status-success-title{
+    font-size:0.34rem;
+    font-weight:bold;
+    color:rgba(1,121,89,1);
+    line-height:0.48rem;
+  }
+  .payment-status-tips{
+    font-size:0.24rem;
+    color:rgba(102,102,102,1);
+    line-height:0.36rem;
+    margin: 0.2rem 0;
+  }
+  .payment-status-fail-title{
+    font-size:0.34rem;
+    font-weight:bold;
+    color:rgba(189,0,0,1);
+    line-height:0.43rem;
+  }
+  .payment-status-info{
+    border-bottom: 1px solid #DCDCDC;
+    padding: 0  0.3rem 0.4rem;
+  }
+  .payment-status-info-title{
+    font-size:0.28rem;
+    font-weight:bold;
+    color:rgba(102,102,102,1);
+    line-height:0.35rem;
+    margin-bottom: 0.2rem;
+  }
+  .payment-status-detail-info-item{
+    font-size:0.24rem;
+    color:rgba(102,102,102,1);
+    line-height:0.3rem;
+    margin: 0.1rem;
+  }
+  .payment-status-detail-more{
+    font-size:0.24rem;
+    color:$green;
+    line-height:0.3rem;
+    margin: 0.3rem 0 0;
+    .s-icon{
+      margin-left: 0.1rem;
+    }
+  }
+  .payment-status-detail-more-info{
+    padding-top: 0.2rem;
+  }
+  .payment-status-info-support{
+    padding: 0.3rem 0.3rem 0.4rem;
+  }
+  .payment-status-detail-info-srcad{
+    width: 100%;
+    height:1.8rem;
+    background: red;
+    text-align: center;
+  }
+  .payment-status-go-home{
+    display: inline-block;
+    width:6.2rem;
+    height:0.84rem;
+    background:rgba(227,164,40,1);
+    border-radius:0.12rem;
+    margin: 0.4rem 0 0.6rem;
+    font-size:0.36rem;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    line-height:0.84rem;
+  }
+</style>

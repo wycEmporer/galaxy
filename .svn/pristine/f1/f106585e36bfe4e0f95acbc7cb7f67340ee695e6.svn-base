@@ -1,0 +1,106 @@
+<template>
+  <div class="trip_list"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="isMoreLoading"
+    :infinite-scroll-immediate-check="true"
+    infinite-scroll-distance="60">
+    <template v-for="(item, index) in triplist">
+      <div class="list_child" :key="index">
+        <TripInfoPart :flightInfo="item" @click.native="searchTripDetail(item)"></TripInfoPart>
+        <button class="list_btn">Pay Now</button>
+      </div>
+    </template>
+    <div class="loading-box" v-show="isLoading">
+      <mt-spinner type="fading-circle" :size='30'></mt-spinner>
+      <span class="loading-more-txt">loading ...</span>
+    </div>
+  </div>
+</template>
+<script>
+import { Indicator, Spinner } from 'mint-ui';
+import { mapState } from 'vuex';
+export default {
+  components: {
+    'mt-spinner': Spinner,
+    TripInfoPart: () => import('@/components/TripInfoPart')
+  },
+  data () {
+    return {
+      status: 1,
+      isLoading: false,
+      isMoreLoading: false,
+      loadInfo: {
+        pageNum: 1,
+        pageSize: 5,
+        totalPage: 2
+      }
+    };
+  },
+  created () {
+    this.loadMore();
+  },
+  computed: {
+    ...mapState({
+      triplist: state => state.MyTripList.triplistArray
+    })
+  },
+  methods: {
+    loadMore () {
+      Indicator.close();
+      if (this.loadInfo.pageNum > this.loadInfo.totalPage) {
+        this.isLoading = false;
+        this.isMoreLoading = false;
+        return false;
+      }
+      this.loadInfo.pageNum += 1;
+      this.isMoreLoading = true;
+      this.isLoading = true;
+      setTimeout(() => {
+        this.$store.commit('saveMyTripList', 1);
+        this.loadMore();
+      }, 100);
+    },
+    searchTripDetail (info) {
+      this.$router.push(`/trip/detail?id=${info.fn}`);
+    }
+  }
+};
+</script>
+<style lang="scss">
+.trip_list .mint-spinner-fading-circle{
+  margin:auto;
+}
+</style>
+<style lang="scss" scoped>
+// .user_trip{}
+.trip_list{
+  background: rgb(241,241,241);
+  overflow: hidden;
+  padding:0.3rem;
+}
+.list_child{
+  @include flexCenter;
+  justify-content: space-between;
+  background: #fff;
+  padding:0.2rem 0.3rem;
+  margin-bottom: 0.2rem;
+  border-radius:0.12rem;
+  box-shadow:0rem 0.02rem 0.06rem 0rem rgba(174,174,174,0.5);
+}
+.list_btn{
+  width:1.57rem;
+  height:0.44rem;
+  line-height: 0.44rem;
+  color:#fff;
+  background:rgba(227,164,40,1);
+  border-radius:0.04rem;
+  font-weight: bold;
+}
+// loading...
+.loading-box {
+  text-align: center;
+}
+.loading-more-txt {
+  font-size: 0.18rem;
+}
+</style>

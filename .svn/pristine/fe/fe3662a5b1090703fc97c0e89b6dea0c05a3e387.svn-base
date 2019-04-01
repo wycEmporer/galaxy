@@ -1,0 +1,24 @@
+<template>
+  <div class="search-city">
+    <div class="search-city-depart">
+      <div class="search-city-input_box">
+        <input type="text" v-model="departAirportString">
+        <div class="search-city-input_box-close s-icon-close s-icon"></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      departAirportString: ''
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.search-city-input_box{
+  position: relative;
+}
+</style>

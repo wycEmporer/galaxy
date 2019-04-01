@@ -1,0 +1,28 @@
+<template>
+  <div class="flight_template">
+    <template v-for="(item, index) in flightlist">
+      <div :key="index">
+        <p></p>
+      </div>
+    </template>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    flightlist: {
+      type: Array
+    }
+  },
+  data () {
+    return {
+
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flight_template{
+
+}
+</style>

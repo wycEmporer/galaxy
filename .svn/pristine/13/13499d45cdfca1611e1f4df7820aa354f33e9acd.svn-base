@@ -1,0 +1,15 @@
+<template>
+  <div>
+    <SearchForm/>
+  </div>
+</template>
+<script>
+import SearchForm from './SearchForm';
+
+export default {
+  name: 'Home',
+  components: {
+    SearchForm
+  }
+};
+</script>

@@ -1,0 +1,41 @@
+<template>
+  <div class="user_trip">
+    <template v-for="(item, index) in tabBarList" >
+      <TabBar :tabBarObj="item" :key="index" @click.native="searchDiffOrder(index)"></TabBar>
+    </template>
+  </div>
+</template>
+<script>
+export default {
+  components: {
+    TabBar: () => import('@/components/TabBar')
+  },
+  data () {
+    return {
+      tabBarList: [
+        { title: 'Upcomming', active: true },
+        { title: 'Unpaid', active: false },
+        { title: 'Completed', active: false },
+        { title: 'Cancelled', active: false }
+      ]
+    };
+  },
+  methods: {
+    searchDiffOrder (index) {
+      this.tabBarList.forEach((e, i) => {
+        if (index === i) {
+          e.active = true;
+        } else {
+          e.active = false;
+        }
+      });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.user_trip{
+  @include flexCenter;
+  text-align: center;
+}
+</style>

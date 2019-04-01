@@ -1,0 +1,56 @@
+<template>
+  <div>
+    <FlightDetails/>
+    <TravelerDetails/>
+    <couponInfo/>
+    <summaryInfo/>
+    <transition name="tc-slide">
+      <terms-condition v-if="isShowTC"></terms-condition>
+    </transition>
+  </div>
+</template>
+<script>
+import FlightDetails from './FlightDetails';
+import TravelerDetails from './TravelerDetails';
+import couponInfo from './CouponInfo';
+import summaryInfo from './SummaryInfo';
+import TermsCondition from '@/components/TC.vue';
+import EventHub from '@/utils/EventHub';
+export default {
+  name: 'Home',
+  data () {
+    return {
+      isShowTC: false
+    };
+  },
+  components: {
+    FlightDetails,
+    TravelerDetails,
+    couponInfo,
+    summaryInfo,
+    TermsCondition
+  },
+  created () {
+    EventHub.$on('isShowTC', (val) => {
+      this.isShowTC = val;
+    });
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.tc-slide-enter-active {
+  animation: bounce-in .5s;
+}
+.tc-slide-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+</style>

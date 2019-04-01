@@ -1,0 +1,32 @@
+<template>
+  <div class="user_trip">
+    <!-- <template v-for="(item, index) in triplist">
+      <TripInfoPart :flightInfo="item" :key="index"></TripInfoPart>
+    </template> -->
+  </div>
+</template>
+<script>
+// import TripInfoPart from '';
+export default {
+  components: {
+    // TripInfoPart: () => import('@/components/TripInfoPart')
+  },
+  data () {
+    return {
+      triplist: [
+        { id: 0, fn: '321', dt: '12h:05m', at: '12h05m', ds: 'DOM', as: 'SIN'},
+        { id: 1 },
+        { id: 2 },
+        { id: 3 },
+        { id: 4 },
+        { id: 5 },
+        { id: 6 },
+        { id: 7 }
+      ]
+    };
+  }
+}
+</script>
+<style lang="scss" scoped>
+
+</style>

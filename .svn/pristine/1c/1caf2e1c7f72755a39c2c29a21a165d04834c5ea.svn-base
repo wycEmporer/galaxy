@@ -1,0 +1,62 @@
+<template>
+  <div>
+    <FlightDetails :flightInfo="flightInfo"></FlightDetails>
+    <TravelerDetails :flightInfo="flightInfo"></TravelerDetails>
+    <couponInfo/>
+    <summaryInfo/>
+    <transition name="tc-slide">
+      <terms-condition v-if="isShowTC"></terms-condition>
+    </transition>
+  </div>
+</template>
+<script>
+import FlightDetails from './FlightDetails';
+import TravelerDetails from './TravelerDetails';
+import couponInfo from './CouponInfo';
+import summaryInfo from './SummaryInfo';
+import TermsCondition from '@/components/TC.vue';
+import EventHub from '@/utils/EventHub';
+export default {
+  name: 'Home',
+  data () {
+    return {
+      isShowTC: false,
+      flightInfo: ''
+    };
+  },
+  components: {
+    FlightDetails,
+    TravelerDetails,
+    couponInfo,
+    summaryInfo,
+    TermsCondition
+  },
+  created () {
+    EventHub.$on('isShowTC', (val) => {
+      this.isShowTC = val;
+    });
+    this.$http('/heg_api/order/getFlights.do?token=ae394ca5-0567-4f33-9fe1-5badafacfc2f_P211E_HEG1_UK995_p130&_=1553569762264').then((res) => {
+      if (res.success) {
+        this.flightInfo = res.flights;
+      }
+    });
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.tc-slide-enter-active {
+  animation: bounce-in .5s;
+}
+.tc-slide-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+</style>

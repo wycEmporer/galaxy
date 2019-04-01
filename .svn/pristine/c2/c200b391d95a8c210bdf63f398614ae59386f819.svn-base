@@ -1,0 +1,50 @@
+<template>
+  <div class="flights_header">
+    <div class="flights_header-left">
+      <h3 class="flights_header-city">{{'Dubai'}} - {{'Mumbai'}}</h3>
+      <p class="flights_header-time">{{'Tue, 20 Nov / Tue, 20 Nov'}}</p>
+    </div>
+    <i class="s-icon s-icon-search" @click="showSearchModel"></i>
+  </div>
+</template>
+<script>
+import { mapState, mapGetters } from 'vuex';
+
+export default {
+  data () {
+    return {};
+  },
+  computed: {
+    ...mapState({
+      showWhichFlights: (state) => state.FlightInfo.showWhichFlights
+    }),
+    ...mapGetters(['suitableFlightsList'])
+  },
+  methods: {
+    showSearchModel () {
+      this.$emit('searchModel');
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flights_header{
+  background: $green;
+  padding:0.25rem 0.3rem;
+  @include flexCenter;
+  justify-content: space-between;
+  .flights_header-city{
+    color: #fff;
+    font-size: 0.38rem;
+    line-height:0.48rem;
+  }
+  .flights_header-time{
+    color: #fff;
+    font-size: 0.22rem;
+    line-height:0.3rem;
+  }
+  .s-icon{
+    cursor: pointer;
+  }
+}
+</style>

@@ -1,0 +1,16 @@
+
+let rules = {
+  'Fname': {
+    getMessage: field => field + '无效!',
+    validate: (value, args) => {
+      return value.length === 11
+    }
+  },
+  'Lname': {
+    getMessage: field => field + '无效!',
+    validate: (value, args) => {
+      return value.length === 11
+    }
+  },
+}
+export default rules;

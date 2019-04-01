@@ -1,0 +1,90 @@
+<template>
+  <div class="home-wrap">
+    <SearchCity v-if="showCityLayer"/>
+    <Calendar v-if="showCalendarLayer" />
+    <SearchPassenger v-if="showPassengerLayer" />
+    <HomeTopBanner/>
+    <SearchForm />
+      <History/>
+    <HomeOffer/>
+    <RecentTrips />
+    <div class="home-banners">
+      <img class="home-banner" src="https://img.happyeasygo.com/img/1551412356626.png" alt="">
+      <img class="home-banner" src="https://img.happyeasygo.com/img/1551412356626.png" alt="">
+    </div>
+    <div class="home-logo">
+      <img class="home-logo-img" src="//m.happyeasygo.com/dist/images/909c104a220392369ac4a6a7818a5909.png" alt="">
+      BEST PRICE GUARANTEED
+    </div>
+  </div>
+</template>
+<script>
+import SearchForm from './SearchForm';
+import { mapState } from 'vuex';
+import HomeTopBanner from './HomeTopBanner';
+import History from './History';
+import RecentTrips from './RecentTrips';
+import HomeOffer from './Offer';
+
+export default {
+  name: 'Home',
+  components: {
+    SearchForm,
+    HomeTopBanner,
+    History,
+    RecentTrips,
+    HomeOffer,
+    SearchCity: () => import('@/components/SearchCity'),
+    Calendar: () => import('@/components/Calendar'),
+    SearchPassenger: () => import('@/components/SearchPassenger')
+  },
+  data () {
+    return {
+      showCity: false
+    };
+  },
+  computed: {
+    ...mapState({
+      showCityLayer: (state) => state.SearchForm.showCityLayer,
+      showCalendarLayer: (state) => state.SearchForm.showCalendarLayer,
+      showPassengerLayer: (state) => state.SearchForm.showPassengerLayer
+    })
+  },
+  methods: {
+
+  },
+  created () {
+
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .home-wrap{
+    width: 100%;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
+
+  .home-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 0.98rem;
+    font-size: 0.22rem;
+    color: $lightBlack;
+    background-color: #fff;
+  }
+  .home-logo-img{
+    width: 3.41rem;
+  }
+  .home-banners{
+    padding:0.2rem 0.3rem;
+  }
+  .home-banner{
+    // height: 1.5rem;
+    width: 6.6rem;
+    margin-bottom: 0.2rem;
+    border-radius: 0.12rem;
+  }
+</style>

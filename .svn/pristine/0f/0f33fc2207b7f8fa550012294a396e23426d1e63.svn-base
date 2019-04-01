@@ -1,0 +1,108 @@
+<template>
+  <div class="detail_city">
+    <div class="confirm-info-detail">
+      <p class="confirm-info-detail-title text-style marTopBom">Price Detail</p>
+      <p class="text-style2">Note: This trip is booked with trip <a class="green line_under">1065498754</a></p>
+      <p class="text-style2">Pricing detail below contains both trip.</p>
+    </div>
+    <ul>
+      <li class="confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Base fare</div>
+        <div class="text-style s-confirm-general-val">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Taxes &amp; Fees</div>
+        <div class="text-style s-confirm-general-val">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Convenience Fee</div>
+        <div class="text-style s-confirm-general-val">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Customer Prom</div>
+        <div class="text-style s-confirm-general-val ">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Insurance</div>
+        <div class="text-style s-confirm-general-val ">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price space-line">
+        <div class="text-style s-confirm-general-key">Grand Total</div>
+        <div class="text-style s-confirm-general-val ">₹ 1325</div>
+      </li>
+      <li class=" confirm-info-detail-item-price">
+        <div class="text-style s-confirm-general-key">Coupon</div>
+        <div class="text-style s-confirm-general-val green">- ₹ 325</div>
+      </li>
+    </ul>
+    <div class=" confirm-info-detail-item-price confirm-info-detail-total">
+      <div class="text-style s-confirm-general-total-key">Total</div>
+      <div class="text-style s-confirm-general-total-val">₹ 1325</div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  computed: {
+
+  },
+}
+</script>
+<style lang="scss" scoped>
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.text-style2{
+  font-size: 0.24rem;
+  line-height: 0.36rem;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  margin-top: 0.4rem;
+}
+.confirm-info-detail-item-price{
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+  text-align: right;
+  font-size: 0.32rem;
+  line-height: 0.45rem;
+}
+.space-line{
+  padding-top: 0.45rem;
+  border-top:0.01rem solid rgba(220,220,220,1);
+}
+// total
+.confirm-info-detail-total{
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.s-confirm-general-total-key{
+  color:$lighterBlack;
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.s-confirm-general-total-val{
+  font-size: 0.42rem;
+  line-height: 0.52rem;
+  font-weight: bold;
+  margin-left: 0.2rem;
+}
+.green{
+  color:$green;
+}
+.line_under{
+  text-decoration:underline;
+}
+</style>

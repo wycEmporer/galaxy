@@ -1,0 +1,24 @@
+<template>
+  <div>
+    <SearchCity
+    @getDepartAirport="getDepartAirport"
+    @getArriveAirport="getArriveAirport"
+    />
+  </div>
+</template>
+<script>
+
+export default {
+  name: 'SearchForm',
+  components: {
+    // SearchCalendar: () => import('@/component/SearchCalendar'),
+    // SearchPassengers: () => import('@/component/SearchPassengers'),
+    SearchCity: () => import('@/component/SearchCity')
+  }
+  // data () {
+  //   return {
+  //     dd: 1
+  //   };
+  // }
+};
+</script>

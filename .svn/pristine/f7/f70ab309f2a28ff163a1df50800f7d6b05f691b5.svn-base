@@ -1,0 +1,308 @@
+<template>
+  <div class="travelers-info">
+    <div v-for="(adult, A_index) in adults" :key="A_index">
+      <p class="traveler-info-title">Traveler {{A_index+1}} : Adult</p>
+      <form action="">
+        <div class="travelers-info-sex">
+          <label for="male" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 0 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Male</label>
+          <input name="sex" class="hide" id="male" type="radio" value="0" v-model="isChecked"/>
+          <label for="female" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 1 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Female</label>
+          <input name="sex" class="hide" id="female" value="1" v-model="isChecked" type="radio" />
+        </div>
+        <div class="travelers-info-name">
+          <div class="relative">
+            <label for="" class="s-traveler-general ">First Name</label>
+            <input type="text" :name="'Fname_A_'+ A_index" v-validate="'required|Fname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Fname_A_'+ A_index)">{{ errors.first('Fname_A_'+ A_index) }}</span>
+          </div>
+          <div class="relative">
+            <label for="" class="s-traveler-general">Last Name</label>
+            <input type="text" :name="'Lname_A_'+ A_index" v-validate="'required|Lname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Lname_A_'+ A_index)">{{ errors.first('Lname_A_'+ A_index) }}</span>
+          </div>
+        </div>
+        <div v-if="flightInfo.birthdateRequired">
+          <label for="" class="s-traveler-general">Date of Birth</label>
+          <div class="travelers-info-date-box">{{birthDate}}
+            <input type="date" v-model="birthDate" class="travelers-info-date-input" >
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+
+          <label for="" class="s-traveler-general">Nationality</label>
+          <div class="travelers-info-date-box">{{nationalName}}
+            <select name="" id="" class="travelers-info-date-input" v-model="nationalName">
+              <option v-for="(country, index) in countrylist" :key="index" :value="country.name" :code="country.code">
+                {{country.name}}
+              </option>
+            </select>
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+        <div class="passport-info-date" v-if="isPassPort">
+          <div class="passport-info-date-box">
+            <label for="" class="s-traveler-general">Passport No.</label>
+            <input type="text" :name="'passportNo_A' + A_index" v-validate="'required'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('passportNo_A'+ A_index)">{{ errors.first('passportNo_A'+ A_index) }}</span>
+          </div>
+          <label for="" class="s-traveler-general">Passport Expiry Date</label>
+          <div class="travelers-info-date-box">{{passPortDate}}
+            <input type="date" v-model="passPortDate" name="" class="travelers-info-date-input">
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div v-for="(child, C_index) in childs" :key="C_index + adults">
+      <p class="traveler-info-title">Traveler {{C_index+1 +  adults}} : Child</p>
+      <form action="">
+        <div class="travelers-info-sex">
+          <label for="male" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 0 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Male</label>
+          <input name="sex" class="hide" id="male" type="radio" value="0" v-model="isChecked"/>
+          <label for="female" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 1 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Female</label>
+          <input name="sex" class="hide" id="female" value="1" v-model="isChecked" type="radio" />
+        </div>
+        <div class="travelers-info-name">
+          <div class="relative">
+            <label for="" class="s-traveler-general ">First Name</label>
+            <input type="text" :name="'Fname_C_'+ C_index" v-validate="'required|Fname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Fname_C_'+ C_index)">{{ errors.first('Fname_C_'+ C_index) }}</span>
+          </div>
+          <div class="relative">
+             <label for="" class="s-traveler-general">Last Name</label>
+            <input type="text" :name="'Lname_C_'+ C_index" v-validate="'required|Lname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Lname_C_'+ C_index)">{{ errors.first('Lname_C_'+ C_index) }}</span>
+          </div>
+        </div>
+        <div>
+          <label for="" class="s-traveler-general">Date of Birth</label>
+          <div class="travelers-info-date-box">{{birthDate}}
+            <input type="date" v-model="birthDate" class="travelers-info-date-input" >
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+
+          <label for="" class="s-traveler-general">Nationality</label>
+          <div class="travelers-info-date-box">{{nationalName}}
+            <select name="" id="" class="travelers-info-date-input" v-model="nationalName">
+              <option v-for="(country, index) in countrylist" :key="index" :value="country.name" :code="country.code">
+                {{country.name}}
+              </option>
+            </select>
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+        <div class="passport-info-date" v-if="isPassPort">
+          <div class="passport-info-date-box">
+            <label for="" class="s-traveler-general">Passport No.</label>
+            <input type="text" :name="'passportNo_C_' + C_index" v-validate="'required'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('passportNo_C_'+ C_index)">{{ errors.first('passportNo_C_'+ C_index) }}</span>
+          </div>
+          <label for="" class="s-traveler-general">Passport Expiry Date</label>
+          <div class="travelers-info-date-box">{{passPortDate}}
+            <input type="date" v-model="passPortDate" name="" class="travelers-info-date-input">
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div v-for="(baby, B_index) in babys" :key="B_index +  adults + childs">
+      <p class="traveler-info-title">Traveler {{B_index +1+  adults + childs}} : Baby</p>
+      <form action="">
+        <div class="travelers-info-sex">
+          <label for="male" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 0 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Male</label>
+          <input name="sex" class="hide" id="male" type="radio" value="0" v-model="isChecked"/>
+          <label for="female" class="s-traveler-general travelers-info-sex-label"><i class="s-icon" :class="isChecked == 1 ? 's-icon-checked' : 's-icon-unchecked'"></i>&nbsp;Female</label>
+          <input name="sex" class="hide" id="female" value="1" v-model="isChecked" type="radio" />
+        </div>
+        <div class="travelers-info-name">
+          <div class="relative">
+            <label for="" class="s-traveler-general ">First Name</label>
+            <input type="text" :name="'Fname_B_'+ B_index" v-validate="'required|Fname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Fname_B_'+ B_index)">{{ errors.first('Fname_B_'+ B_index) }}</span>
+          </div>
+          <div class="relative">
+            <label for="" class="s-traveler-general">Last Name</label>
+            <input type="text" :name="'Lname_B_'+ B_index" v-validate="'required|Lname'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('Lname_B_'+ B_index)">{{ errors.first('Lname_B_'+ B_index) }}</span>
+          </div>
+        </div>
+        <div>
+          <label for="" class="s-traveler-general">Date of Birth</label>
+          <div class="travelers-info-date-box">{{birthDate}}
+            <input type="date" v-model="birthDate" class="travelers-info-date-input" >
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+
+          <label for="" class="s-traveler-general">Nationality</label>
+          <div class="travelers-info-date-box">{{nationalName}}
+            <select name="" id="" class="travelers-info-date-input" v-model="nationalName">
+              <option v-for="(country, index) in countrylist" :key="index" :value="country.name" :code="country.code">
+                {{country.name}}
+              </option>
+            </select>
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+        <div class="passport-info-date" v-if="isPassPort">
+          <div class="passport-info-date-box relative">
+            <label for="" class="s-traveler-general">Passport No.</label>
+            <input type="text" :name="'passportNo_B_' + B_index" v-validate="'required'" class="travelers-info-name-input">
+            <span class="errorText" v-show="errors.has('passportNo_B_'+ B_index)">{{ errors.first('passportNo_B_'+ B_index) }}</span>
+          </div>
+          <label for="" class="s-traveler-general">Passport Expiry Date</label>
+          <div class="travelers-info-date-box">{{passPortDate}}
+            <input type="date" v-model="passPortDate" name="" class="travelers-info-date-input">
+            <i class="s-icon s-icon-datadown"></i>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+/**
+ * rules : 设置 非空无效验证规则
+ */
+import rules from '../rules.js';
+import { Validator } from 'vee-validate';
+/**
+ * dict : 设置 为空时的验证规则
+ */
+const dict = {
+  en: {
+    messages: { required: () => `This field is required` }
+  }
+};
+
+Validator.localize(dict);
+
+export default {
+  props: ['flightInfo'],
+  data () {
+    return {
+      isChecked: 0,
+      birthDate: '',
+      passPortDate: '',
+      countrylist: [],
+      nationalName: '',
+      adults: 0,
+      childs: 0,
+      babys: 0,
+      isPassPort: false,
+
+    }
+  },
+  methods: {
+    setValidatorRuler () {
+      for (let rule in rules) {
+        this.$validator.extend(rule, rules[rule]);
+      }
+      console.log(this.$validator);
+    },
+    getPassPortFlag (paramet) {
+      this.$http.post('/heg_api/policy/checkPassport.do', paramet).then((res) => {
+        this.isPassPort = res.data[0].passportPolicy;
+      });
+    },
+
+  },
+  created () {
+    this.$http('/heg_api/airportCity/searchCountry.do').then((res) => {
+      this.countrylist = res.data;
+    });
+    this.setValidatorRuler();
+  },
+  watch: {
+    flightInfo (val, oldVal) {
+      this.$nextTick(() => {
+        this.adults = val.requestFromClient.adults;
+        this.childs = val.requestFromClient.childs;
+        this.babys = val.requestFromClient.baby;
+        const paramet = {
+          departFlight: {},
+          requestFromClient: {}
+        };
+        paramet.departFlight.stopByFlightArray = val.departFlight.stopByFlightArray;
+        paramet.requestFromClient = val.requestFromClient;
+        if (val.returnFlight) {
+          paramet.returnFlight = {};
+          paramet.returnFlight.stopByFlightArray = val.returnFlight.stopByFlightArray;
+        }
+        this.getPassPortFlag(paramet);
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .s-traveler-general{
+    font-size: 0.32rem;
+    color: #111;
+  }
+  .travelers-info{
+    margin-top: 10px;
+  }
+  .relative{
+    position: relative;
+  }
+  .errorText{
+    position: absolute;
+    right: 0.2rem;
+    top: 0.84rem;
+    font-size:0.22rem;
+    color:rgba(214,13,13,1);
+  }
+  .traveler-info-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: $lightBlack;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .travelers-info-sex{
+    line-height: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .travelers-info-sex-label{
+    margin-right: 0.6rem;
+  }
+
+  .travelers-info-name-input{
+    display: block;
+    width: 100%;
+    height:0.82rem;
+    background:rgba(250,250,250,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    margin: 0.2rem 0;
+    padding: 4px 10px;
+    &:focus{
+      border:0.01rem solid rgba(1,121,89,1);
+    }
+  }
+  .travelers-info-date-box{
+    width:100%;
+    height:0.82rem;
+    margin: 0.2rem 0;
+    position: relative;
+     background:rgba(234,234,234,1);
+    border-radius:0.12rem;
+    border:0.01rem solid rgba(220,220,220,1);
+    line-height: 0.62rem;
+    padding: 0.1rem 0rem 0.1rem 0.2rem;
+  }
+  .travelers-info-date-box .s-icon{
+    position: absolute;
+    right: 0.2rem;
+    top: 0.36rem;
+  }
+  .travelers-info-date-input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+</style>

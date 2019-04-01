@@ -1,0 +1,14 @@
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router.js';
+import 'mint-ui/lib/style.css';
+import FontUtils from '@/utils/FontUtils';
+import { Range, Checklist } from 'mint-ui';
+
+FontUtils.init();
+Vue.component(Range.name, Range);
+Vue.component(Checklist.name, Checklist);
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app');

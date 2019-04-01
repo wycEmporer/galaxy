@@ -1,0 +1,16 @@
+<template>
+  <div>
+    <SearchForm/>
+    <div class="s-icon s-icon-down"></div>
+  </div>
+</template>
+<script>
+import SearchForm from './SearchForm';
+
+export default {
+  name: 'Home',
+  components: {
+    SearchForm
+  }
+};
+</script>

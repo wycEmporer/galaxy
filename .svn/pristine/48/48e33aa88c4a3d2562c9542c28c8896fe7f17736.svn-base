@@ -1,0 +1,88 @@
+<template>
+  <div class="detail_manage">
+    <p class="confirm-info-detail-title text-style">Manage Trip</p>
+    <ul>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Share Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage" v-if="status === 1">
+        <div class="text-style2 ">Print Invoice</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage">
+        <div class="text-style2 ">Print Ticket</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage" @click="changeTrip">
+        <div class="text-style2 ">Change Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+      <li class="confirm-info-detail-manage" @click="cancelTrip">
+        <div class="text-style2 ">Cancel Trip</div>
+        <i class="s-icon s-icon-datadown"></i>
+      </li>
+    </ul>
+  </div>
+</template>
+<script>
+import { mapState } from 'vuex';
+export default {
+  props: ['tripManage'],
+  computed: {
+    ...mapState({
+      status: state => state.MyTripList.status
+    })
+  },
+  methods: {
+    changeTrip () {
+      let tripId = this.$route.query.tripId;
+      this.$router.push(`/trip/changetrip/${tripId}`);
+    },
+    cancelTrip () {
+      let tripId = this.$route.query.tripId;
+      this.$router.push(`/trip/canceltrip/${tripId}`);
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.detail_manage{
+  margin-bottom: 0.3rem;
+}
+.marTopBom{
+  margin-bottom: 0.3rem;
+  margin-top: 0.4rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+}
+// manage
+.confirm-info-detail-manage{
+  padding:0.28rem 0;
+  border-bottom:1px solid #d8d8d8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.confirm-info-detail-manage:last-child {
+  border:0;
+}
+.s-icon-datadown{
+  cursor: pointer;
+  transform: rotate(-90deg);
+}
+</style>

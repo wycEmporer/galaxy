@@ -1,0 +1,33 @@
+<template>
+  <div class="change-trip-warp">
+    trip
+  </div>
+</template>
+<script>
+
+export default {
+  name: 'Home',
+  components: {
+
+  },
+  data () {
+    return {
+
+    };
+  },
+  computed: {
+
+  },
+  methods: {
+
+  },
+  created () {
+
+  }
+};
+</script>
+<style lang="scss" scoped>
+  .change-trip-warp{
+    padding: 0rem 0.3rem;
+  }
+</style>

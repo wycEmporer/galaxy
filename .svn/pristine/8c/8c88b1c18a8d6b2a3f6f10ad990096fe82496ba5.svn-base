@@ -1,0 +1,92 @@
+<template>
+  <div class="list" >
+    <template v-if="showDiffFlight == 1">
+      <div v-for="(item, index) in flightlist" :key="index">
+        <Oneway :flightObj="item" :advImagelist="advImagelist" @click="selectOneFlight(item)" />
+        <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+          <img :src="advImagelist[parseInt(index / 4)]" alt="">
+        </div>
+      </div>
+    </template>
+    <template v-if="showDiffFlight == 2">
+      <div v-show="showDepartList">
+        <div v-for="(item, index) in flightObj.depart" :key="index">
+          <Oneway :flightObj="item" :advImagelist="advImagelist" @click.native="selectRoundFlight(1, item)" />
+          <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+            <img :src="advImagelist[parseInt(index / 4)]" alt="">
+          </div>
+        </div>
+      </div>
+      <div v-show="showReturnList">
+        <div v-for="(item, index) in flightObj.return" :key="index">
+          <Oneway :flightObj="item" :advImagelist="advImagelist" @click.native="selectRoundFlight(2, item)" />
+          <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+            <img :src="advImagelist[parseInt(index / 4)]" alt="">
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-if="showDiffFlight == 3" >
+      <div v-for="(item, index) in flightlist" :key="index">
+        <International :flightInfo ="item" :advImagelist="advImagelist" @click.native="selectIntFlight(item)" />
+        <div class="adv_images" v-show="(advImagelist.length > 1) && ((index+1)% 4 === 1)" >
+          <img :src="advImagelist[parseInt(index / 4)]" alt="">
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+<script>
+import Oneway from '@/components/flightInfo.vue';
+import International from '@/components/flightInfoInter.vue';
+export default {
+  props: ['flightlist', 'flightObj', 'advImagelist', 'showDiffFlight'],
+  components: {
+    Oneway,
+    International
+  },
+  data () {
+    return {
+      showDepartList: true,
+      showReturnList: false
+    };
+  },
+  created () {
+    this.roundwayTrip = true;
+  },
+  methods: {
+    selectOneFlight (data) {
+      console.log(data);
+    },
+    selectRoundFlight (type, data) {
+      console.log(type);
+      console.log(data);
+      if (type === 1) {
+        this.showDepartList = false;
+        this.showReturnList = true;
+        this.$emit('selectReturnFlight');
+      } else {
+        this.showDepartList = false;
+        this.showReturnList = false;
+      }
+    },
+    selectIntFlight (data) {
+      console.log(data);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.list{
+  padding:0.3rem;
+  background: #f1f1f1;
+}
+//adv_images
+.adv_images img{
+  width:6.6rem;
+  // height:1.5rem;
+  vertical-align: top;
+  margin-bottom: 0.2rem;
+  border-radius:0.04rem;
+}
+</style>

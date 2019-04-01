@@ -1,0 +1,124 @@
+<template>
+  <div class="detail_city">
+    <p class="confirm-info-title marBot20">Trip ID : <span class="info-title">{{tripCity.id}}</span></p>
+    <div v-for="(item, index) in tripCity.voyageinfo" :key="index">
+      <div class="confirm-info-detail" >
+        <p class="confirm-info-detail-title2 text-style marBot20 clear">
+          {{item.dc}}({{item.ds}}) - {{item.ac}}({{item.as}})
+          <span class="trip-status">{{item.status}}</span></p>
+        <p class="confirm-info-detail-title text-style marBot30">Flight Info</p>
+        <ul>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Operated by:</div>
+            <div class="text-style s-confirm-general-val">{{item.an}}</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Flight code:</div>
+            <div class="text-style s-confirm-general-val">{{item.fn}}</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Departure : </div>
+            <div class="text-style s-confirm-general-val">
+              {{getHFWDMY(new Date(item.dt))}} {{item.da}} ({{item.dc}})
+            </div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Arrival:</div>
+            <div class="text-style s-confirm-general-val">
+              {{getHFWDMY(new Date(item.at))}} {{item.aa}} ({{item.ac}})
+            </div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Flight Duration:</div>
+            <div class="text-style s-confirm-general-val">{{item.wdt}}, none-stop</div>
+          </li>
+          <li class="confirm-info-detail-item">
+            <div class="text-style s-confirm-general-key">Baggage Policy:</div>
+            <div class="text-style s-confirm-general-val">
+              1 checkin luggage ( &lt; {{tripCity.baggageinfo[item.fn].ch}}kg ), 1 cabin luggage ( &lt; {{tripCity.baggageinfo[item.fn].ca}} kg )
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p class="confirm-info-refundable">{{item.refundable?'refundable':'none-refundable'}}</p>
+    </div>
+  </div>
+</template>
+<script>
+import { getHFWDMY } from '@/utils/DateFormatUtils';
+export default {
+  props: ['tripCity'],
+  data () {
+    return {
+      getHFWDMY
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.marBot20{
+  margin-bottom: 0.2rem;
+}
+.marBot30{
+  margin-bottom: 0.3rem;
+}
+.marTopBom{
+  margin-bottom: 0.3rem;
+  margin-top: 0.4rem;
+}
+.text-style{
+  font-size: 0.24rem;
+  line-height: 0.3rem;
+}
+.detail_city{
+  margin-bottom: 0.4rem;
+}
+.confirm-info-title{
+  font-size: 0.24rem;
+  color: $lighterBlack;
+}
+.info-title{
+  color: $lightBlack;
+}
+.confirm-info-detail-title{
+  color:$lightBlack;
+  font-weight: bold;
+}
+.confirm-info-detail-title2{
+  font-size:0.32rem;
+  line-height:0.39rem;
+  color:rgba(0,0,0,1);
+  font-weight: bold;
+}
+.trip-status{
+  float: right;
+  height:0.27rem;
+  color:#333;
+  font-size: 0.24rem;
+}
+.confirm-info-detail-item{
+  display: flex;
+  margin-bottom: 0.1rem;
+}
+.confirm-info-detail-item-price{
+  margin-top: 0.38rem;
+}
+.confirm-info-refundable{
+  font-size: 0.24rem;
+  color:rgba(227,164,40,1);
+  line-height:0.3rem;
+}
+.confirm-info-refundable{
+  font-size: 0.24rem;
+  color:rgba(227,164,40,1);
+  line-height:0.3rem;
+}
+.s-confirm-general-key{
+  width: 30%;
+  color:rgba(153,153,153,1);
+}
+.s-confirm-general-val{
+  width: 70%;
+  color:rgba(17,17,17,1);
+}
+</style>

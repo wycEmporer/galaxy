@@ -1,0 +1,17 @@
+<template>
+  <div>{{dd + getItem}}</div>
+</template>
+
+<script>
+import { getItem } from '@/utils/CookieUtils';
+export default {
+  data () {
+    return {
+      dd: 1
+    };
+  },
+  methods: {
+    getCookiet: getItem('dd')
+  }
+};
+</script>

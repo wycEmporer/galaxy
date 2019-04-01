@@ -1,0 +1,102 @@
+<template>
+  <div class="flight_template">
+    <template v-for="(item, index) in flightlist">
+      <div class="flight_info" :key="index">
+        <div class="info_airport">
+          <img class="info_airport-img" :src="item.img" alt="">
+          <p class="info_airport-name ellipsis">{{item.name}}</p>
+        </div>
+        <div class="info_time">
+          <div class="info_time-depart">
+            <span>{{item.DT}}</span>
+            <p>{{item.dCode}}</p>
+          </div>
+          <div class="info_time-stop"></div>
+          <div class="info_time-arrive"></div>
+        </div>
+        <div class="info_price">
+          <p class="info_price_old"><span class="rs">Rs</span>{{item.price}}</p>
+          <p class="info_price_now"><span class="rs">Rs</span>{{item.price}}</p>
+          <p class="info_price_save">Save <span class="rs">Rs</span>{{item.save}}</p>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    flightlist: {
+      type: Array
+    }
+  },
+  data () {
+    return {
+
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.flight_info{
+  width:6.6rem;
+  height:1.53rem;
+  background: #fff;
+  padding:0.3rem 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius:0.12rem;
+  box-shadow:0rem 0.02rem 0.06rem 0rem rgba(174,174,174,0.5);
+  @include flexCenter;
+}
+.info_airport{
+  width:15%;
+  line-height: 0rem;
+}
+.info_airport-img{
+  display: block;
+  width:0.4rem;
+  height:0.4rem;
+  border-radius:50%;
+  margin:0 auto 0.12rem;
+}
+.info_airport-name{
+  font-size:0.2rem;
+  font-weight:400;
+  color: $lightBlack;
+  line-height:0.25rem;
+  text-align: center;
+  margin:auto;
+}
+.info_time{
+  width:60%;
+  @include flexCenter;
+}
+
+.info_price{
+  width:30%;
+  text-align: right;
+}
+.info_price_old{
+  font-size:0.22rem;
+  color:$lighterBlack;
+  line-height:0.27rem;
+}
+.info_price_old .rs{
+  color:$lighterBlack;
+}
+.info_price_now{
+  font-size:0.36rem;
+  font-weight:700;
+  color:#111;
+  line-height:0.45rem;
+}
+.info_price_now .rs{
+  color:#111;
+  font-weight:700;
+}
+.info_price_save{
+  font-size:0.22rem;
+  color:#f00;
+  line-height:0.27rem;
+}
+</style>

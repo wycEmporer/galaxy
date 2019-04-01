@@ -1,0 +1,13 @@
+.s-icon {display:inline-block; background-image: url(~@/assets/images/sprite.png?); }
+.s-icon-calendar {width: 30px; height: 30px; background-position: -85px 0px; background-size: 115px 97px;}
+.s-icon-checked {width: 13px; height: 13px; background-position: -94px -55px; background-size: 115px 97px;}
+.s-icon-close {width: 15px; height: 15px; background-position: -77px -55px; background-size: 115px 97px;}
+.s-icon-closed {width: 24px; height: 23.5px; background-position: -29px -55px; background-size: 115px 97px;}
+.s-icon-exchange {width: 43px; height: 27px; background-position: 0px -26px; background-size: 115px 97px;}
+.s-icon-flyto {width: 83px; height: 24px; background-position: 0px 0px; background-size: 115px 97px;}
+.s-icon-history {width: 28px; height: 26px; background-position: -45px -26px; background-size: 115px 97px;}
+.s-icon-minus {width: 20px; height: 20px; background-position: -85px -32px; background-size: 115px 97px;}
+.s-icon-nike {width: 10px; height: 10px; background-position: -14px -85px; background-size: 115px 97px;}
+.s-icon-plus {width: 20px; height: 20px; background-position: -55px -55px; background-size: 115px 97px;}
+.s-icon-unchecked {width: 12px; height: 12px; background-position: 0px -85px; background-size: 115px 97px;}
+.s-icon-user {width: 27px; height: 28px; background-position: 0px -55px; background-size: 115px 97px;}
